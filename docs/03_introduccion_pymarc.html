@@ -216,7 +216,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul>
 <section id="qué-es-marc" class="level2">
 <h2 class="anchored" data-anchor-id="qué-es-marc">¿Qué es MARC?</h2>
-<p><strong>MARC</strong> es el acrónimo de <strong>MA</strong>chine-<strong>R</strong>eadable <strong>C</strong>ataloging (Catalogación legible por máquina). Define un formato de datos que surgió de una iniciativa liderada por la Biblioteca del Congreso de EE.UU. hace casi cuarenta años.</p>
+<p><strong>MARC</strong> es el acrónimo de <strong>MA</strong>chine-<strong>R</strong>eadable <strong>C</strong>ataloging (Catalogación legible por máquina). Define un formato de datos que surgió de una iniciativa liderada por la Biblioteca del Congreso de EE.UU. hace más de cincuenta años.</p>
 <p>Este formato proporciona un mecanismo para que los ordenadores puedan intercambiar, usar e interpretar información bibliográfica. Los elementos de datos de MARC forman la base de la mayoría de los catálogos de bibliotecas utilizados actualmente.</p>
 <p>En los años 80 pasó a llamarse <strong>USMARC</strong>, y a fines de los años 90 se convirtió en <strong>MARC 21</strong>.</p>
 <p><strong>Recursos útiles:</strong> - Sitio oficial de MARC: <a href="https://www.loc.gov/marc/">https://www.loc.gov/marc/</a> - Términos y definiciones MARC: <a href="https://www.loc.gov/marc/umb/um01to06.html#part3">https://www.loc.gov/marc/umb/um01to06.html#part3</a> - Formato MARC 21 para datos bibliográficos (completo y resumido): <a href="http://www.loc.gov/marc/bibliographic/">http://www.loc.gov/marc/bibliographic/</a></p>
@@ -291,7 +291,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td style="text-align: center;">✅</td>
 </tr>
 <tr class="even">
-<td>Validar registros MARC con reglas MARC21</td>
+<td>Validar registros MARC con reglas MARC 21</td>
 <td style="text-align: center;">🚫</td>
 <td style="text-align: center;">✅</td>
 </tr>
@@ -337,7 +337,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="leer-archivos-marc-con-pymarc" class="level2">
 <h2 class="anchored" data-anchor-id="leer-archivos-marc-con-pymarc">Leer archivos MARC con PyMARC</h2>
 <p>Para leer archivos MARC, analicemos el siguiente script:</p>
-<div id="92464b56" class="cell" data-execution_count="1">
+<div id="707d700a" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Importamos la biblioteca pymarc, que nos ayuda a leer archivos MARC</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pymarc</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -464,7 +464,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="accesando-los-campos-de-un-archivo-marc" class="level2">
 <h2 class="anchored" data-anchor-id="accesando-los-campos-de-un-archivo-marc">Accesando los campos de un archivo MARC</h2>
-<div id="c3922d5d" class="cell" data-execution_count="2">
+<div id="27bf5361" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pymarc <span class="im">import</span> MARCReader  <span class="co"># Importamos la clase MARCReader desde la biblioteca pymarc</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Definimos el nombre del archivo MARC que queremos leer</span></span>
@@ -529,7 +529,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><strong>¿Qué estamos haciendo aquí?</strong> <code>record</code> es un objeto creado por PyMARC que representa un solo registro MARC.</p>
 <p>Podemos utilizar este objeto para acceder solamente a los campos que nos interesan.</p>
 <p>Para hacer esto, le decimos a Python cuál es el nombre o la etiqueta del campo MARC que queremos extraer.</p>
-<div id="9793522d" class="cell" data-execution_count="3">
+<div id="7f18a1bb" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pymarc <span class="im">import</span> MARCReader</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sys <span class="im">import</span> stderr</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Definimos el nombre del archivo MARC que queremos leer</span></span>
@@ -578,7 +578,7 @@ Y se accede a sus campos usando la sintaxis de corchetes, como:</p>
 <p>Aunque <code>record</code> no es exactamente un diccionario, se comporta de manera similar en muchos aspectos, porque la clase <code>Record</code> fue diseñada para imitar ese comportamiento.</p>
 <p><strong>Recursos para seguir aprendiendo</strong></p>
 <p>No vamos a profundizar en esta lección en cómo funcionan las clases o los diccionarios, pero si te interesa, hay muchos recursos gratuitos donde puedes aprender más. <a href="https://www.w3schools.com/python/default.asp">Tutoriales de Python</a></p>
-<p><strong>Comparación visual: Diccionario Python vs Objeto <code>record</code> de PyMARC</strong></p>
+<p><strong>Comparación visual: Diccionario Python vs.&nbsp;Objeto <code>record</code> de PyMARC</strong></p>
 <table class="table">
 <thead>
 <tr class="header">
@@ -637,7 +637,7 @@ Aunque <code>record</code> no sea técnicamente un diccionario, <strong>PyMARC l
 <section id="cómo-extraer-múltiples-campos-en-pymarc" class="level3">
 <h3 class="anchored" data-anchor-id="cómo-extraer-múltiples-campos-en-pymarc">Cómo extraer múltiples campos en PyMARC</h3>
 <p>Si queremos <strong>extraer varios campos MARC específicos</strong> (por ejemplo, autor, título, descripción física, autor adicional), podemos usar un bucle y acceder a cada uno individualmente dentro del registro.</p>
-<div id="8cd3362c" class="cell" data-execution_count="4">
+<div id="75d4de23" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pymarc <span class="im">import</span> MARCReader</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Definimos el nombre del archivo MARC que queremos leer</span></span>
@@ -680,10 +680,10 @@ Aunque <code>record</code> no sea técnicamente un diccionario, <strong>PyMARC l
 =700  1\$aMelanson, Mark R.</code></pre>
 </div>
 </div>
-<p><strong>Nota:</strong> Cada línea print(record[‘XXX’]) intenta acceder a un campo específico por su etiqueta MARC.</p>
+<p><strong>Nota:</strong> Cada línea <code>print(record['XXX'])</code> intenta acceder a un campo específico por su etiqueta MARC.</p>
 <p>Si el campo no existe en ese registro, PyMARC levantará un error de tipo <code>KeyError</code>.</p>
 <p>Alternativamente, puedes usar la función <code>.get_fields()</code> para obtener varios campos en un objecto iterable sin levantar ningún error:</p>
-<div id="5533e23e" class="cell" data-execution_count="5">
+<div id="088d200a" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pymarc <span class="im">import</span> MARCReader</span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Definimos el nombre del archivo MARC que queremos leer</span></span>
@@ -695,7 +695,7 @@ Aunque <code>record</code> no sea técnicamente un diccionario, <strong>PyMARC l
 <span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>    </span>
 <span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Iteramos sobre cada registro</span></span>
 <span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> record <span class="kw">in</span> reader:</span>
-<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>        campos <span class="op">=</span> record.get_fields(<span class="st">'100'</span>,<span class="st">'245'</span>, <span class="st">'300'</span>, <span class="st">'700'</span>)</span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>        campos <span class="op">=</span> record.get_fields(<span class="st">'100'</span>, <span class="st">'245'</span>, <span class="st">'300'</span>, <span class="st">'700'</span>)</span>
 <span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> campo <span class="kw">in</span> campos:</span>
 <span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a>            <span class="bu">print</span>(campo)</span>
 <span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Detener después del primer registro (para ejemplo)</span></span>
@@ -718,8 +718,12 @@ Ejercicio
 </div>
 <div id="callout-1" class="callout-1-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>Descarga el archivo MARC presentado en esta unidad. Intenta: - Leerlo - Pedir multiples campos</p>
-<p>Imprime cada una utilizando la función <code>print</code>.</p>
+<p>Descarga el archivo MARC presentado en esta unidad. Intenta:</p>
+<ol type="1">
+<li>Leerlo</li>
+<li>Pedir multiples campos</li>
+</ol>
+<p>Imprime cada uno utilizando la función <code>print</code>.</p>
 </div>
 </div>
 </div>
@@ -729,7 +733,7 @@ Ejercicio
 <h2 class="anchored" data-anchor-id="acceder-a-subcampos-marc-específicos-con-pymarc">Acceder a subcampos MARC específicos con PyMARC</h2>
 <p>Podemos usar el mismo método de “clave” (<code>key</code>) para acceder a los <strong>subcampos</strong> dentro de un campo MARC específico.</p>
 <p><strong>Ejemplo:</strong></p>
-<div id="9c64097b" class="cell" data-execution_count="6">
+<div id="9d27c880" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pymarc <span class="im">import</span> MARCReader</span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Definimos el nombre del archivo MARC que queremos leer</span></span>
@@ -768,7 +772,7 @@ Ejercicio
 <p>Este método funciona solo si el campo y los subcampos existen. Si algún subcampo está ausente en un registro, obtendrás un error del tipo <code>KeyError</code>.</p>
 <p><strong>NOTA:</strong> El código anterior fracasa cuando trata de obtener el subcampo <code>b</code> que no está presente en el campo <code>245</code> del registro.</p>
 <p>Para evitar eso, puedes usar el método <code>.get_subfields</code>, una forma más segura de accesso:</p>
-<div id="5cc14bb9" class="cell" data-execution_count="7">
+<div id="c9a28bec" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pymarc <span class="im">import</span> MARCReader</span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Definimos el nombre del archivo MARC que queremos leer</span></span>
@@ -878,7 +882,7 @@ Subcampo 'c': []</code></pre>
 </tbody>
 </table>
 <p>Puedes combinar varios métodos, por ejemplo:</p>
-<div id="c8193ebb" class="cell" data-execution_count="8">
+<div id="049a42b8" class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span>  pymarc <span class="im">import</span> MARCReader</span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Definimos el nombre del archivo MARC que queremos leer</span></span>
@@ -977,10 +981,10 @@ Family Equality Council records,</code></pre>
 </div>
 <p><strong>¿Qué incluye este script?</strong></p>
 <ul>
-<li><p>Análisis del campo 245 con distintos métodos ([‘a’], .value(), .title())</p></li>
+<li><p>Análisis del campo 245 con distintos métodos (<code>['a']</code>, <code>.value()</code>, <code>.title()</code>)</p></li>
 <li><p>Acceso seguro a subcampos</p></li>
 <li><p>Extracción de materias geográficas y temáticas (650, 651)</p></li>
-<li><p>Uso de type() para mostrar los tipos de datos</p></li>
+<li><p>Uso de <code>type()</code> para mostrar los tipos de datos</p></li>
 </ul>
 
 

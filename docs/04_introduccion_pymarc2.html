@@ -171,7 +171,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#busqueda-general" id="toc-busqueda-general" class="nav-link active" data-scroll-target="#busqueda-general">Busqueda General</a></li>
+  <li><a href="#búsqueda-general" id="toc-búsqueda-general" class="nav-link active" data-scroll-target="#búsqueda-general">Búsqueda general</a></li>
   <li><a href="#búsqueda-de-campos-específicos-con-pymarc" id="toc-búsqueda-de-campos-específicos-con-pymarc" class="nav-link" data-scroll-target="#búsqueda-de-campos-específicos-con-pymarc">Búsqueda de campos específicos con PyMARC</a></li>
   <li><a href="#subcampos-y-bucles-anidados" id="toc-subcampos-y-bucles-anidados" class="nav-link" data-scroll-target="#subcampos-y-bucles-anidados">Subcampos y bucles anidados</a></li>
   <li><a href="#métodos-especiales-de-pymarc" id="toc-métodos-especiales-de-pymarc" class="nav-link" data-scroll-target="#métodos-especiales-de-pymarc">Métodos especiales de PyMARC</a>
@@ -179,8 +179,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#get_fields-get_subfields" id="toc-get_fields-get_subfields" class="nav-link" data-scroll-target="#get_fields-get_subfields"><code>get_fields()</code>, <code>get_subfields()</code></a></li>
   <li><a href="#acceder-a-indicadores-de-un-campo-.indicator1-.indicator2" id="toc-acceder-a-indicadores-de-un-campo-.indicator1-.indicator2" class="nav-link" data-scroll-target="#acceder-a-indicadores-de-un-campo-.indicator1-.indicator2">Acceder a indicadores de un campo, .indicator1 , .indicator2</a></li>
   </ul></li>
-  <li><a href="#otros-métodos-del-objeto-record" id="toc-otros-métodos-del-objeto-record" class="nav-link" data-scroll-target="#otros-métodos-del-objeto-record">Otros métodos del objeto <code>record</code></a></li>
-  <li><a href="#construyendo-un-parser-básico" id="toc-construyendo-un-parser-básico" class="nav-link" data-scroll-target="#construyendo-un-parser-básico">Construyendo un parser básico</a></li>
+  <li><a href="#otros-métodos-del-objeto-record" id="toc-otros-métodos-del-objeto-record" class="nav-link" data-scroll-target="#otros-métodos-del-objeto-record">Otros Métodos del Objeto <code>record</code></a></li>
+  <li><a href="#construyendo-un-parser-básico" id="toc-construyendo-un-parser-básico" class="nav-link" data-scroll-target="#construyendo-un-parser-básico">Construyendo un Parser Básico</a></li>
   <li><a href="#otros-ejemplos" id="toc-otros-ejemplos" class="nav-link" data-scroll-target="#otros-ejemplos">Otros ejemplos</a></li>
   </ul>
 </nav>
@@ -212,11 +212,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><p>Accede al archivo de Goggle Colab <a href="https://colab.research.google.com/drive/1FI4DCIFxeBIGJECH-w5pkqIU5XfQ51we?usp=sharing">aqui</a></p></li>
 </ul>
 <p>Vamos a seguir explorando cómo realizar búsquedas.</p>
-<section id="busqueda-general" class="level2">
-<h2 class="anchored" data-anchor-id="busqueda-general">Busqueda General</h2>
+<section id="búsqueda-general" class="level2">
+<h2 class="anchored" data-anchor-id="búsqueda-general">Búsqueda general</h2>
 <p><strong>¿Qué pasa si queremos encontrar cualquier registro que contenga un termino en particular?</strong></p>
-<p>Sugerencias: * California * San Francisco * lesbian</p>
-<div id="f3ad5379" class="cell" data-execution_count="1">
+<p>Sugerencias: - California - San Francisco - lesbian</p>
+<div id="135bb2c0" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Importamos la biblioteca pymarc, que nos ayuda a leer archivos MARC</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pymarc</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -321,10 +321,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="búsqueda-de-campos-específicos-con-pymarc" class="level2">
 <h2 class="anchored" data-anchor-id="búsqueda-de-campos-específicos-con-pymarc">Búsqueda de campos específicos con PyMARC</h2>
-<p>La busqueda anterior imprime todos los campos the un registro.Esto podría devolver una gran cantidad de datos de poco interes para nosotors. Pensemos en cómo podríamos formular mejor esta pregunta para refinar los resultados.</p>
-<p>Si en lugar de imprimir todo el registro, queremos ver sólo los campos MARC que contienen el patrón de interes, podemos añadir otro bucle.</p>
+<p>La búsqueda anterior imprime todos los campos de un registro. Esto podría devolver una gran cantidad de datos de poco interés para nosotros. Pensemos en cómo podríamos formular mejor esta pregunta para refinar los resultados.</p>
+<p>Si en lugar de imprimir todo el registro, queremos ver sólo los campos MARC que contienen el patrón de interés, podemos añadir otro bucle.</p>
 <p>Además, podríamos querer mostrar el identificador del registro junto con el campo coincidente:</p>
-<div id="493ae8ce" class="cell" data-execution_count="2">
+<div id="c47d40d3" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Importamos la biblioteca pymarc, que nos ayuda a leer archivos MARC</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pymarc</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -388,7 +388,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>PyMARC ofrece varios <strong>métodos abreviados</strong> para acceder a campos y subcampos de forma elegante.</p>
 <section id="get_fields-get_subfields" class="level3">
 <h3 class="anchored" data-anchor-id="get_fields-get_subfields"><code>get_fields()</code>, <code>get_subfields()</code></h3>
-<div id="4786a6b7" class="cell" data-execution_count="3">
+<div id="880c2a8e" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pymarc</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>my_marc_file <span class="op">=</span> <span class="st">"data/edited_69x_subject.mrc"</span></span>
@@ -447,7 +447,7 @@ https://www.loc.gov/marc/bibliographic/concise/bd245.html</p>
 </section>
 <section id="acceder-a-indicadores-de-un-campo-.indicator1-.indicator2" class="level3">
 <h3 class="anchored" data-anchor-id="acceder-a-indicadores-de-un-campo-.indicator1-.indicator2">Acceder a indicadores de un campo, .indicator1 , .indicator2</h3>
-<div id="a04bccba" class="cell" data-execution_count="4">
+<div id="c22c22c9" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pymarc</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>my_marc_file <span class="op">=</span> <span class="st">"data/edited_69x_subject.mrc"</span></span>
@@ -493,7 +493,7 @@ Indicador 2 del campo 245: 0</code></pre>
 </section>
 </section>
 <section id="otros-métodos-del-objeto-record" class="level2">
-<h2 class="anchored" data-anchor-id="otros-métodos-del-objeto-record">Otros métodos del objeto <code>record</code></h2>
+<h2 class="anchored" data-anchor-id="otros-métodos-del-objeto-record">Otros Métodos del Objeto <code>record</code></h2>
 <p>PyMARC ofrece accesos directos a datos comunes:</p>
 <div class="sourceCode" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>record.author()</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>record.isbn()</span>
@@ -521,8 +521,8 @@ Indicador 2 del campo 245: 0</code></pre>
 <hr>
 </section>
 <section id="construyendo-un-parser-básico" class="level2">
-<h2 class="anchored" data-anchor-id="construyendo-un-parser-básico">Construyendo un parser básico</h2>
-<div id="811c22fe" class="cell" data-execution_count="5">
+<h2 class="anchored" data-anchor-id="construyendo-un-parser-básico">Construyendo un Parser Básico</h2>
+<div id="dc5f4b22" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pymarc <span class="im">import</span> MARCReader</span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>archivo <span class="op">=</span> <span class="st">"data/edited_69x_subject.mrc"</span></span>
@@ -720,12 +720,12 @@ Indicador 2 del campo 245: 0</code></pre>
 </section>
 <section id="otros-ejemplos" class="level2">
 <h2 class="anchored" data-anchor-id="otros-ejemplos">Otros ejemplos</h2>
-<p><strong>(a)</strong> ¿Cuál es el ID 001 del registro con el identificador OCLC 39818086?</p>
+<p><strong>(a)</strong> ¿Cuál es el ID <code>001</code> del registro con el identificador OCLC 39818086?</p>
 <div class="sourceCode" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> record <span class="kw">in</span> reader:</span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> f <span class="kw">in</span> record.get_fields(<span class="st">'035'</span>):</span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="st">"39818086"</span> <span class="kw">in</span> f.value():</span>
 <span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>            <span class="bu">print</span>(record[<span class="st">'001'</span>].value())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p><strong>(b)</strong> ¿Cuántos registros tienen más de un campo 500?</p>
+<p><strong>(b)</strong> ¿Cuántos registros tienen más de un campo <code>500</code>?</p>
 <div class="sourceCode" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> record <span class="kw">in</span> reader:</span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="bu">len</span>(record.get_fields(<span class="st">'500'</span>)) <span class="op">&gt;</span> <span class="dv">1</span>:</span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(record[<span class="st">'001'</span>].value())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
