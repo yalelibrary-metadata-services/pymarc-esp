@@ -25,7 +25,7 @@
     "href": "05_introduccion_pymarc3.html",
     "title": "Editar con PyMARC",
     "section": "",
-    "text": "Sample Data: edited_69x_subject.mrc\nEnlace al google colab (python Basics, PyMarc Basics)",
+    "text": "Sample Data: edited_69x_subject.mrc\nAccede al archivo de Goggle Colab aqui",
     "crumbs": [
       "Editar con PyMARC"
     ]
@@ -135,7 +135,7 @@
     "href": "03_introduccion_pymarc.html",
     "title": "Introducción a PyMarc",
     "section": "",
-    "text": "Sample Data: edited_69x_subject.mrc\nEnlace al google colab (python Basics, PyMarc Basics)",
+    "text": "Sample Data: edited_69x_subject.mrc\nAccede al archivo de Goggle Colab aqui",
     "crumbs": [
       "Introducción a PyMarc"
     ]
@@ -315,7 +315,7 @@
     "href": "02_introduccion_python.html",
     "title": "Python 101",
     "section": "",
-    "text": "Python fue inventado por Guido Van Rossum porque quería un lenguaje cuyo principal objetivo fuera proporcionar legibilidad del código y una mayor productividad para los desarrolladores. La idea se le ocurrió en 1980 y trabajó en el proyecto de manera ocasional durante sus vacaciones. No se convirtió en un lenguaje utilizable hasta 1991.\nActualmente, Python es uno de los lenguajes de programación más utilizados y cuenta con un gran respaldo de la comunidad y abundante documentación.\n\n\n\n\n\n\nDetalles a tener en cuenta\n\n\n\n\nExisten muchas maneras diferentes de realizar un mismo proceso.\nEscribe los pasos que necesitas seguir para obtener un resultado (pseudocódigo).\nBusca, busca y sigue buscando: Sitios web como StackOverflow pueden ayudarte con cualquier duda. Es posible que otras personas ya hayan hecho la misma pregunta en ese espacio.",
+    "text": "Accede al archivo de Goggle Colab aqui",
     "crumbs": [
       "Python 101"
     ]
@@ -324,8 +324,8 @@
     "objectID": "02_introduccion_python.html#qué-es-python",
     "href": "02_introduccion_python.html#qué-es-python",
     "title": "Python 101",
-    "section": "",
-    "text": "Python fue inventado por Guido Van Rossum porque quería un lenguaje cuyo principal objetivo fuera proporcionar legibilidad del código y una mayor productividad para los desarrolladores. La idea se le ocurrió en 1980 y trabajó en el proyecto de manera ocasional durante sus vacaciones. No se convirtió en un lenguaje utilizable hasta 1991.\nActualmente, Python es uno de los lenguajes de programación más utilizados y cuenta con un gran respaldo de la comunidad y abundante documentación.\n\n\n\n\n\n\nDetalles a tener en cuenta\n\n\n\n\nExisten muchas maneras diferentes de realizar un mismo proceso.\nEscribe los pasos que necesitas seguir para obtener un resultado (pseudocódigo).\nBusca, busca y sigue buscando: Sitios web como StackOverflow pueden ayudarte con cualquier duda. Es posible que otras personas ya hayan hecho la misma pregunta en ese espacio.",
+    "section": "¿Qué es Python?",
+    "text": "¿Qué es Python?\nPython fue inventado por Guido Van Rossum porque quería un lenguaje cuyo principal objetivo fuera proporcionar legibilidad del código y una mayor productividad para los desarrolladores. La idea se le ocurrió en 1980 y trabajó en el proyecto de manera ocasional durante sus vacaciones. No se convirtió en un lenguaje utilizable hasta 1991.\nActualmente, Python es uno de los lenguajes de programación más utilizados y cuenta con un gran respaldo de la comunidad y abundante documentación.\n\n\n\n\n\n\nDetalles a tener en cuenta\n\n\n\n\nExisten muchas maneras diferentes de realizar un mismo proceso.\nEscribe los pasos que necesitas seguir para obtener un resultado (pseudocódigo).\nBusca, busca y sigue buscando: Sitios web como StackOverflow pueden ayudarte con cualquier duda. Es posible que otras personas ya hayan hecho la misma pregunta en ese espacio.",
     "crumbs": [
       "Python 101"
     ]
@@ -405,7 +405,7 @@
     "href": "04_introduccion_pymarc2.html",
     "title": "Búsqueda con PyMARC",
     "section": "",
-    "text": "Sample Data: edited_69x_subject.mrc\nEnlace al google colab (python Basics, PyMarc Basics)\nVamos a seguir explorando cómo realizar búsquedas.",
+    "text": "Sample Data: edited_69x_subject.mrc\nAccede al archivo de Goggle Colab aqui\nVamos a seguir explorando cómo realizar búsquedas.",
     "crumbs": [
       "Búsqueda con PyMARC"
     ]
@@ -485,7 +485,7 @@
     "href": "06_introduccion_pymarc4.html",
     "title": "Guardar archivos MARC",
     "section": "",
-    "text": "Sample Data: edited_69x_subject.mrc\nEnlace al google colab (python Basics, PyMarc Basics)",
+    "text": "Sample Data: edited_69x_subject.mrc\nAccede al archivo de Goggle Colab aqui",
     "crumbs": [
       "Guardar archivos MARC"
     ]

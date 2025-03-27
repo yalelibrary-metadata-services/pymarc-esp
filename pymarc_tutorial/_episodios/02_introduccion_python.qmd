@@ -11,6 +11,8 @@ keypoints:
 - Las estructuras como condicionales, bucles y comprensiones de listas permiten escribir programas dinámicos, reutilizables y eficientes.
 ---
 
+- Accede al archivo de Goggle Colab [aqui](https://colab.research.google.com/drive/1FI4DCIFxeBIGJECH-w5pkqIU5XfQ51we?usp=sharing)
+
 ## ¿Qué es Python?
 
 Python fue inventado por Guido Van Rossum porque quería un lenguaje cuyo principal objetivo fuera proporcionar legibilidad del código y una mayor productividad para los desarrolladores. La idea se le ocurrió en 1980 y trabajó en el proyecto de manera ocasional durante sus vacaciones. No se convirtió en un lenguaje utilizable hasta 1991.
