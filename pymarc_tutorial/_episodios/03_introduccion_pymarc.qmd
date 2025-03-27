@@ -18,7 +18,7 @@ keypoints:
 
 ## ¿Qué es MARC?
 
-**MARC** es el acrónimo de **MA**chine-**R**eadable **C**ataloging (Catalogación legible por máquina). Define un formato de datos que surgió de una iniciativa liderada por la Biblioteca del Congreso de EE.UU. hace casi cuarenta años.  
+**MARC** es el acrónimo de **MA**chine-**R**eadable **C**ataloging (Catalogación legible por máquina). Define un formato de datos que surgió de una iniciativa liderada por la Biblioteca del Congreso de EE.UU. hace más de cincuenta años.  
 
 Este formato proporciona un mecanismo para que los ordenadores puedan intercambiar, usar e interpretar información bibliográfica. Los elementos de datos de MARC forman la base de la mayoría de los catálogos de bibliotecas utilizados actualmente.
 
@@ -61,7 +61,7 @@ El formato MARC es complejo y binario, no es fácil de leer o procesar sin herra
 | Crear scripts reproducibles o notebooks para talleres                        | ✅        | 🚫          |
 | Editar visualmente registros MARC uno por uno                                | 🚫        | ✅          |
 | Usar sin saber programar (interfaz amigable)                                 | 🚫        | ✅          |
-| Validar registros MARC con reglas MARC21                                     | 🚫        | ✅          |
+| Validar registros MARC con reglas MARC 21                                    | 🚫        | ✅          |
 | Convertir entre MARC, MARCXML, MODS, Dublin Core                             | ✅ (Solo JSON y MARCXML)      | ✅          |
 | Cargar datos desde hojas de cálculo y exportarlos como MARC                  | ✅        | ✅          |
 | Trabajar con autoridades (VIAF, Library of Congress, etc.)                   | 🚫        | ✅          |
@@ -169,7 +169,7 @@ En MARC, los campos se dividen en dos categorías principales:
 | Tipo de campo        | Rango de etiquetas | Características principales |
 |----------------------|--------------------|------------------------------|
 | **Campos de control** | 001–009            | No tienen indicadores ni subcampos. Contienen información fija. |
-| **Campos de datos**   | 010 en adelante     | Incluyen indicadores y subcampos, más complejos y ricos en contenido. |
+| **Campos de datos**   | 010 en adelante    | Incluyen indicadores y subcampos, más complejos y ricos en contenido. |
 
 [Guía de campos de control en MARC](http://www.loc.gov/marc/bibliographic/bd00x.html)
 
@@ -272,7 +272,7 @@ Aunque `record` no es exactamente un diccionario, se comporta de manera similar 
 
 No vamos a profundizar en esta lección en cómo funcionan las clases o los diccionarios, pero si te interesa, hay muchos recursos gratuitos donde puedes aprender más. [Tutoriales de Python](https://www.w3schools.com/python/default.asp)
 
-**Comparación visual: Diccionario Python vs Objeto `record` de PyMARC**
+**Comparación visual: Diccionario Python vs. Objeto `record` de PyMARC**
 
 | Concepto              | Diccionario en Python 🧺 | Objeto `record` en PyMARC 📚 |
 |------------------------|--------------------------|-------------------------------|
@@ -284,6 +284,7 @@ No vamos a profundizar en esta lección en cómo funcionan las clases o los dicc
 | **Métodos útiles**    | `.keys()`, `.values()`   | `.get_fields()`, `.title()`   |
 | **Es realmente un diccionario?** | ✅ Sí            | ❌ No, pero se comporta similar |
 | **Más información**   | [docs.python.org](https://docs.python.org/3/tutorial/datastructures.html#dictionaries) | [PyMARC docs](https://pymarc.readthedocs.io/) |
+
 
 **¿Por qué importa esto?**
 
@@ -322,7 +323,7 @@ with open(my_marc_file, 'rb') as data:
 ```
 
 **Nota:**
-Cada línea print(record['XXX']) intenta acceder a un campo específico por su etiqueta MARC.
+Cada línea `print(record['XXX'])` intenta acceder a un campo específico por su etiqueta MARC.
 
 Si el campo no existe en ese registro, PyMARC levantará un error de tipo `KeyError`.
 
@@ -340,7 +341,7 @@ with open(my_marc_file, 'rb') as data:
     
     # Iteramos sobre cada registro
     for record in reader:
-        campos = record.get_fields('100','245', '300', '700')
+        campos = record.get_fields('100', '245', '300', '700')
         for campo in campos:
             print(campo)
         # Detener después del primer registro (para ejemplo)
@@ -354,10 +355,11 @@ Esto es útil cuando quieres recorrer dinámicamente los campos encontrados en e
 ::: {.callout-caution title="Ejercicio" collapse="true" }
 
 Descarga el archivo MARC presentado en esta unidad. Intenta: 
-- Leerlo
-- Pedir multiples campos
 
-Imprime cada una utilizando la función `print`.
+1. Leerlo
+2. Pedir multiples campos
+
+Imprime cada uno utilizando la función `print`.
 
 :::
 
@@ -530,11 +532,11 @@ with open(my_marc_file, 'rb') as data:
 
 **¿Qué incluye este script?**
 
-- Análisis del campo 245 con distintos métodos (['a'], .value(), .title())
+- Análisis del campo 245 con distintos métodos (`['a']`, `.value()`, `.title()`)
 
 - Acceso seguro a subcampos
 
 - Extracción de materias geográficas y temáticas (650, 651)
 
-- Uso de type() para mostrar los tipos de datos
+- Uso de `type()` para mostrar los tipos de datos
 

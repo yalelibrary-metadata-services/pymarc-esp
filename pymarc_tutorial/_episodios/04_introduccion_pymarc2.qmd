@@ -16,15 +16,15 @@ keypoints:
 
 Vamos a seguir explorando cómo realizar búsquedas.
 
-## Busqueda General
+## Búsqueda general
 
 **¿Qué pasa si queremos encontrar cualquier registro que contenga un termino en particular?**  
 
 
 Sugerencias:
-* California
-* San Francisco
-* lesbian
+- California
+- San Francisco
+- lesbian
 
 ```{python}
 
@@ -53,9 +53,9 @@ with open(my_marc_file, 'rb') as data:
 
 ## Búsqueda de campos específicos con PyMARC
 
-La busqueda anterior imprime todos los campos the un registro.Esto podría devolver una gran cantidad de datos de poco interes para nosotors. Pensemos en cómo podríamos formular mejor esta pregunta para refinar los resultados.
+La búsqueda anterior imprime todos los campos de un registro. Esto podría devolver una gran cantidad de datos de poco interés para nosotros. Pensemos en cómo podríamos formular mejor esta pregunta para refinar los resultados.
 
-Si en lugar de imprimir todo el registro, queremos ver sólo los campos MARC que contienen el patrón de interes, podemos añadir otro bucle.
+Si en lugar de imprimir todo el registro, queremos ver sólo los campos MARC que contienen el patrón de interés, podemos añadir otro bucle.
 
 Además, podríamos querer mostrar el identificador del registro junto con el campo coincidente:
 
@@ -163,7 +163,7 @@ for record in reader:
 
 ---
 
-## Otros métodos del objeto `record`
+## Otros Métodos del Objeto `record`
 
 PyMARC ofrece accesos directos a datos comunes:
 
@@ -199,7 +199,7 @@ for record in reader:
 
 ---
 
-## Construyendo un parser básico
+## Construyendo un Parser Básico
 
 ```{python}
 from pymarc import MARCReader
@@ -265,7 +265,7 @@ Esta tabla resume el propósito de cada parte del código:
 
 ## Otros ejemplos
 
-**(a)** ¿Cuál es el ID 001 del registro con el identificador OCLC 39818086?
+**(a)** ¿Cuál es el ID `001` del registro con el identificador OCLC 39818086?
 
 ```python
 for record in reader:
@@ -274,7 +274,7 @@ for record in reader:
             print(record['001'].value())
 ```
 
-**(b)** ¿Cuántos registros tienen más de un campo 500?
+**(b)** ¿Cuántos registros tienen más de un campo `500`?
 
 ```python
 for record in reader:
