@@ -77,12 +77,17 @@ Los cuatro más básicos (sin incluir los tipos de colección) son:
 
 - **Booleanos (`booleans`)** - un tipo binario que solo puede tener los valores `True` o `False`.
 
+- **Tupla**  
+
  También hay estructuras de colección:
 
 - **Listas (list)** – estructuras utilizadas para almacenar múltiples elementos en una sola variable, como `mylist = ["manzana", "banana", "cereza"]`.
 
 - **Diccionarios (dictionary)** – estructuras que almacenan pares de clave y valor. Son útiles para buscar datos asociados a una clave específica. Ejemplo:
 `persona = {"nombre": "Ana", "edad": 30, "ciudad": "Madrid"}`
+
+- **Tuplas (tuple)** - similares a las listas, pero inmutables, es decir, no se pueden modificar después de su creación. Se usan para almacenar colecciones ordenadas de elementos.
+`frutas = ("manzana", "banana", "cereza")`
 
 
 ::: {.callout-caution title="Ejercicio" collapse="true" }
