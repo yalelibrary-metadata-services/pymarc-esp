@@ -1,5 +1,5 @@
 ---
-title: Introducción Básica a Python
+title: Python 101
 objectives:
 - Comprender los conceptos fundamentales de Python, incluyendo variables, tipos de datos y operadores básicos.
 - Utilizar estructuras de control como condicionales y bucles para controlar el flujo de un programa.
@@ -16,11 +16,12 @@ Python fue inventado por Guido Van Rossum porque quería un lenguaje cuyo princi
 
 Actualmente, Python es uno de los lenguajes de programación más utilizados y cuenta con un gran respaldo de la comunidad y abundante documentación.
 
-::: {.callout-tip title= "Detalles a tener en cuenta"}
+::: {.callout-tip title="Detalles a tener en cuenta" }
 
 - Existen muchas maneras diferentes de realizar un mismo proceso.
 - Escribe los pasos que necesitas seguir para obtener un resultado (pseudocódigo).
 - Busca, busca y sigue buscando: Sitios web como StackOverflow pueden ayudarte con cualquier duda. Es posible que otras personas ya hayan hecho la misma pregunta en ese espacio.
+
 :::
 
 ## Variables
@@ -59,7 +60,7 @@ Para mostrar el valor de una variable en la pantalla en Python, podemos usar la 
 print(weight_lb)
 ```
 
-::: {.callout-caution title= "Ejercicio" collapse="true"}
+::: {.callout-caution title="Ejercicio" collapse="true" }
 
 Intenta crear algunas variables de los tres tipos básicos que hemos visto: **Entero (Integer), Punto Flotante (Floating Point) y Cadena de Texto (String).**
 
@@ -83,7 +84,7 @@ print(weight_lb)
 ```
 
 
-::: {.callout-tip title = "Consejo"}
+::: {.callout-tip title="Consejo" }
 
 Usa `#` para dejar notas sobre lo que hace un bloque de código.
 
@@ -101,7 +102,7 @@ Usa `#` para dejar notas sobre lo que hace un bloque de código.
 * `input()` - permite la entrada de datos por parte del usuario.
   
 
-::: {.callout-caution title= "Ejercicio" collapse="true"}
+::: {.callout-caution title="Ejercicio" collapse="true" }
 
 Escribe un programa que imprima tu nombre.
 
@@ -109,11 +110,14 @@ El código a continuación está parcialmente escrito. Dentro de las flechas **<
 Una vez que tengas los valores correctos, recuerda eliminar las flechas, ya que dejarlas en el código podría causar errores.
 
 ```{python}
+#| echo: true
+#| eval: false
+
 print("What is your name?")
 
 name = <<What would be the appropriate function to use here?>>
 
-print(f"Hello, {<What would be the appropiate variable to use here>}!")
+print(f"Hello, {'<What would be the appropiate variable to use here>'}!")
 
 ```
 
@@ -138,7 +142,7 @@ Puedes notar que la asignación (`=`), que ya hemos utilizado, es solo otro oper
 
 Otro operador que usarás con frecuencia es el operador de **indexación (`[]`)**, que generalmente se utiliza para acceder a elementos dentro de colecciones, como obtener un solo carácter de una cadena de texto.
 
-::: {.callout-tip title = "Los índices en Python comienzan en 0"}
+::: {.callout-tip title="Los índices en Python comienzan en 0" }
 
 Esto significa que el primer elemento tiene índice 0, el segundo tiene índice 1, y así sucesivamente.
 En este ejemplo, accedemos al primer y al tercer carácter de una cadena de texto.
@@ -193,7 +197,7 @@ El bucle for se utiliza para recorrer elementos de una secuencia (lista, tupla, 
 frutas = ["manzana", "banana", "cereza"]
 for fruta in frutas:
     print(fruta)
-````
+```
 
 Se imprime cada fruta de la lista una por una.
 
@@ -208,6 +212,7 @@ contador = 0
 while contador < 5:
     print("Contador:", contador)
     contador += 1
+
 ```
 
 Este bucle imprime los números del 0 al 4. La variable contador se incrementa en cada vuelta hasta que deja de cumplir la condición.

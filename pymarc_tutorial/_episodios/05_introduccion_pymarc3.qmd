@@ -1,5 +1,5 @@
 ---
-title: Parseo con PyMARC
+title: Editar con PyMARC
 objectives:
 - Cambiar información dentro de un registro MARC
 - Eliminar campos o subcampos de un registro MARC
@@ -22,53 +22,79 @@ Para asegurarnos de que estamos creando un nuevo registro que podamos modificar 
 
 ```{python}
 from pymarc import MARCReader
-from copy import deepcopy
-
-my_marc_file = "SELECCIONAR ARCHIVO"
+my_marc_file = "data/edited_69x_subject.mrc"
 
 with open(my_marc_file, 'rb') as data:
-	reader = MARCReader(data)
-	for record in reader:
-		my_record = deepcopy(record)
+    reader = MARCReader(data)
+    for record in reader:
+        # Sin deepcopy es el mismo objecto
+        my_record = record
+        my_record["245"]["a"] = "Mi Nuevo Título"
+        print (record["245"])
+        print (my_record["245"])
+        break
+```
 
-		print (record)
-		print (my_record)
+```{python}
+from pymarc import MARCReader
+from copy import deepcopy
 
-		quit()
+my_marc_file = "data/edited_69x_subject.mrc"
+
+with open(my_marc_file, 'rb') as data:
+    reader = MARCReader(data)
+    for record in reader:
+        # Usando deepcopy es un registro separado
+        my_record = deepcopy(record)
+        my_record["245"]["a"] = "Mi Nuevo Título"
+        print (record["245"])
+        print (my_record["245"])
+        break
 ```
 
 
 ## Editar información existente en un registro
 
 Veamos cómo podemos cambiar una pieza de información ya existente dentro de un registro.  
-Actualmente, en nuestro registro podemos ver que el autor está indicado como **SELECCIONAR ARCHIVO**.
+Actualmente, en nuestro registro podemos ver en el campo `100` una persona de nombre "Gray, Dorothy"
 
-Como ejercicio, imaginemos que **SELECCIONAR ARCHIVO** nos informa que en realidad **él no es el autor**, sino que lo es su hermana gemela: **SELECCIONAR ARCHIVO**.  
+Como ejercicio, imaginemos que nos informan que en realidad no es el nombre indicado, sino que lo es su hermana gemela: Gray, Amber.  
+
 ¡Necesitamos actualizar el registro para que sea correcto!
 
 ```{python}
+from pymarc import MARCReader
 from copy import deepcopy
 
-my_marc_file = "SELECCIONAR ARCHIVO"
+my_marc_file = "data/edited_69x_subject.mrc"
+old_name = "Gray, Dorothy"
+old_d = "1922-1976"
+new_name = "Gray, Amber"
+new_d = "1922-1989"
 
 with open(my_marc_file, 'rb') as data:
-	reader = MARCReader(data)
+    reader = MARCReader(data)
     for record in reader:
+        try:
+            if old_name not in record["100"]["a"]:
+                continue
+        except KeyError:
+            continue
         my_record = deepcopy(record)
 
         # Solo necesitamos actualizar el subcampo 'a'.
         # Nota la puntuación del catalogador... ¡tenemos que incluir la coma!
-        my_record['100']['a'] = "SELECCIONAR ARCHIVO,"
-
-        # Comparamos el registro original y el modificado
-        print(record['100'])
-        print(my_record['100'])
-
-    quit()
+        if old_name in my_record['100']['a']:
+            my_record['100']['a'] = new_name
+            my_record['100']['d'] = new_d
+            # Comparamos el registro original y el modificado
+            print(record['100'])
+            print(my_record['100'])
+            break
 
 ```
 
-::: {.callout-caution title= "Ejercicio" collapse="true"}
+::: {.callout-caution title="Ejercicio" collapse="true" }
 
 ¿Cómo cambiarías la fecha de nacimiento en el subcampo `d` a "1920-"?
 
@@ -76,24 +102,26 @@ with open(my_marc_file, 'rb') as data:
 my_record['100']['d'] = "1920-"
 ```
 
+:::
 
 ## Eliminando campos de un registro
 
 Supongamos que queremos eliminar el campo `300`:
 
 ```{python}
+from pymarc import MARCReader
 from copy import deepcopy
 
-my_marc_file = "SELECCIONAR ARCHIVO"
+my_marc_file = "data/edited_69x_subject.mrc"
 
 with open(my_marc_file, 'rb') as data:
-	reader = MARCReader(data)
+    reader = MARCReader(data)
     for record in reader:
         my_record = deepcopy(record)
         for my_field in my_record.get_fields('300'):
             my_record.remove_field(my_field)
             print(my_record)
-        quit()
+        break
 ```
 
 
@@ -102,20 +130,34 @@ with open(my_marc_file, 'rb') as data:
 Eliminar subcampo `'d'` del campo `100`:
 
 ```{python}
+from pymarc import MARCReader
 from copy import deepcopy
 
-my_marc_file = "SELECCIONAR ARCHIVO"
+my_marc_file = "data/edited_69x_subject.mrc"
 
 with open(my_marc_file, 'rb') as data:
-	reader = MARCReader(data)
+    reader = MARCReader(data)
     for record in reader:
+        # Verificar que el registro tenga campo `100` y subcampo `d`
+        if len(record.get_fields("100")) < 1:
+            continue
+        try:
+            d=record["100"]["d"]
+        except KeyError:
+            continue
+
+        # Crear copia
         my_record = deepcopy(record)
+
+        # Borrar subcampo
         for field in my_record.get_fields('100'):
             field.delete_subfield('d')
-            print(my_record)
-        quit()
-```
+        print(record["100"])
+        print(my_record["100"])
 
+        # Salir despues del primer ejemplo
+        break
+```
 
 ## Añadiendo un nuevo campo a un registro
 
@@ -131,41 +173,46 @@ En PyMARC existen **dos tipos de campos**:
 Podemos consultar la documentación de PyMARC para ver cómo se construye un objeto de tipo `Field`:
 
 ```{python}
+#| code-overflow: scroll
+#| classes: output
 from pymarc import Field
 
 print(help(Field))
 ```
 
+
 **Creamos un nuevo campo `245` con subcampos:**
 
 ```{python}
-from pymarc import Field
+from pymarc import MARCReader, Field, Subfield
 from copy import deepcopy
 
-my_marc_file = "SELECCIONAR ARCHIVO"
+my_marc_file = "data/edited_69x_subject.mrc"
 
 with open(my_marc_file, 'rb') as data:
-	reader = MARCReader(data)
+    reader = MARCReader(data)
     for record in reader:
         my_record = deepcopy(record)
         nuevo_campo = Field(
             tag='245',
             indicators=['0', '1'],
             subfields=[
-                'a', 'The pragmatic programmer : ',
-                'b', 'from journeyman to master /',
-                'c', 'Andrew Hunt, David Thomas.'
+                Subfield(code="a", value='The pragmatic programmer : '),
+                Subfield(code='b', value='from journeyman to master /'),
+                Subfield(code='c', value='Andrew Hunt, David Thomas.')
             ]
         )
 
         my_record.add_ordered_field(nuevo_campo)
+        print(my_record)
+        break
 ```
 
  Usamos `add_ordered_field()` para insertar el campo en el lugar correcto.
 
 ## Validación
 
-PyMARC **no valida** si tu campo sigue el estándar MARC. Puedes crear campos no válidos, así que debes conocer las reglas del formato MARC.
+PyMARC **no valida** si tu campo sigue el estándar MARC. Puedes crear campos no válidos, así que debes conocer las reglas del formato MARC. ¿Qué error introducimos al añadir un nuevo campo `245`?
 
 
 ## Crear un registro nuevo desde cero
@@ -179,7 +226,7 @@ print(nuevo_registro)
 
 Contiene solo el campo obligatorio `LEADER`.
 
-::: {.callout-caution title= "Ejercicio" collapse="true"}
+::: {.callout-caution title="Ejercicio" collapse="true" }
 
 **Ejercicio: crea este registro**
 
@@ -192,15 +239,43 @@ Contiene solo el campo obligatorio `LEADER`.
 | 650      |      | 0    | a: Cats, b: Competitive...        |
 
 ```{python}
-from pymarc import Record, Field
+from pymarc import Record, Field, Subfield
 
 nuevo_registro = Record()
 campos = [
     Field('003', data='Nz'),
-    Field(tag='100', indicators=['1',' '], subfields=['a','Gattuso, Jay,','d','d1978-']),
-    Field(tag='245', indicators=['1','0'], subfields=['a','Goats. Are they the best animals? :','b','What about Cats!?']),
-    Field(tag='650', indicators=[' ','0'], subfields=['a','Goats','b','Competitive Pet Keeping']),
-    Field(tag='650', indicators=[' ','0'], subfields=['a','Cats','b','Competitive Pet Keeping'])
+    Field(
+        tag='100', 
+        indicators=['1',' '], 
+        subfields=[
+            Subfield(code="a", value="Gattuso, Jay,"),
+            Subfield(code="d", value="d1978-")
+        ]
+    ),
+    Field(
+        tag='650', 
+        indicators=[' ','0'], 
+        subfields=[
+            Subfield(code="a", value="Goats"),
+            Subfield(code='b', value='Competitive Pet Keeping')
+        ]
+    ),
+    Field(
+        tag='650', 
+        indicators=[' ','0'], 
+        subfields=[
+            Subfield(code="a", value="Cats"),
+            Subfield(code='b', value='Competitive Pet Keeping')
+        ]
+    ),
+    Field(
+        tag='245', 
+        indicators=['1','0'], 
+        subfields=[
+            Subfield(code="a", value='Goats. Are they the best animals? :'),
+            Subfield(code="b", value='What about Cats!?')
+        ]
+    )
 ]
 
 for campo in campos:
@@ -213,7 +288,7 @@ print(nuevo_registro)
 
 ## ¿Importa el orden de los campos?
 
-> No siempre. El estándar MARC solo exige que los campos de control (001-009) vayan al inicio.  
+> No siempre. El estándar MARC solo exige que los campos de control (001-009) vayan al inicio.
 > Pero muchas herramientas esperan ver los campos ordenados numéricamente, por lo tanto se recomienda usar `add_ordered_field()` en lugar de `add_field()`.
 
 ## Recursos
@@ -223,9 +298,9 @@ print(nuevo_registro)
 
 ## Otros ejemplos
 
-### Consecuencias no deseadas 
+### Consecuencias no deseadas
 
-¿Cuál es el requisito implícito "oculto" en la tarea: **"eliminar el campo 300 de nuestro registro"**?  
+¿Cuál es el requisito implícito "oculto" en la tarea: **"eliminar el campo 300 de nuestro registro"**?
 ¿Qué impacto podría tener esto en nuestro proceso?
 
 Podríamos estar **asumiendo** que solo hay **un campo 300** en el registro. Si asumimos eso y no lo verificamos, podríamos terminar **eliminando más campos de los que esperábamos**.  
@@ -250,7 +325,7 @@ Aquí un ejemplo de cómo implementar la validación lógica en el código:
 from pymarc import MARCReader
 from copy import deepcopy
 
-my_marc_file = "SELECCIONAR ARCHIVO"
+my_marc_file = "data/edited_69x_subject.mrc"
 
 with open(my_marc_file, 'rb') as data:
     reader = MARCReader(data)
@@ -266,8 +341,10 @@ with open(my_marc_file, 'rb') as data:
             print("Solo un campo 300 encontrado en el registro ID {}. Eliminándolo.".format(record['001'].value()))
             for my_field in my_fields:
                 my_record.remove_field(my_field)
-        else:
+        elif len(my_fields) > 1:
             print("Hay más de un campo 300 en el registro ID {}. No se elimina nada.".format(record['001'].value()))
+        else:
+            print("No se halló el campo 300 en el registro ID {}. No se elimina nada.".format(record['001'].value()))
 
         # Comparación entre el registro original y el modificado
         print("Campos 300 en el registro original:", len(record.get_fields('300')))
@@ -287,7 +364,7 @@ with open(my_marc_file, 'rb') as data:
         print("Campos 035 en el registro original:", len(record.get_fields('035')))
         print("Campos 035 en el registro modificado:", len(my_record.get_fields('035')))
 
-        quit()
+        break
 ```
 
 **Buenas prácticas**

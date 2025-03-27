@@ -1,0 +1,11 @@
+---
+title: PyMARC en Español
+---
+
+## Objetivos
+
+Este repositorio y página espera recopilar una serie de talleres y tutoriales pare el uso de PyMARC en Español.
+
+## Talleres
+
+* [Taller Introductorio PyMARC](01_introduccion.qmd)

@@ -1,5 +1,5 @@
 ---
-title: Parseo con PyMARC
+title: Búsqueda con PyMARC
 objectives:
 - Buscar campos específicos con PyMARC  
 - Buscar datos específicos con PyMARC  
@@ -12,20 +12,27 @@ keypoints:
 - Download marc files
 - Enlace al google colab (python Basics, PyMarc Basics)
 
-## Búsqueda de campos específicos con PyMARC
-
 Vamos a seguir explorando cómo realizar búsquedas.
 
-**¿Qué pasa si queremos encontrar cualquier registro que contenga la cadena "SELECCIONAR PATRON"?**  
-¿Cómo podríamos adaptar nuestro código?
+## Busqueda General
+
+**¿Qué pasa si queremos encontrar cualquier registro que contenga un termino en particular?**  
+
+
+Sugerencias:
+* California
+* San Francisco
+* lesbian
 
 ```{python}
 
 # Importamos la biblioteca pymarc, que nos ayuda a leer archivos MARC
 import pymarc
 
+termino_de_busqueda = "California"
+
 # Definimos el nombre del archivo MARC que vamos a leer
-my_marc_file = "SELECCIONAR ARCHIVO"
+my_marc_file = "data/edited_69x_subject.mrc"
 
 # Abrimos el archivo en modo binario ('rb' significa 'read binary')
 with open(my_marc_file, 'rb') as data:
@@ -35,16 +42,18 @@ with open(my_marc_file, 'rb') as data:
     
     # Recorremos cada registro en el archivo MARC
     for record in reader:
-        if "New Zealand" in str(record):
+        if termino_de_busqueda in str(record):
             print(record)
-        # Detener después del primer registro (para ejemplo)
-        quit()
+            # Detener después del primer registro con "New Zealand"
+            break
   
 ```
 
-Esto podría devolver una gran cantidad de datos si no tenemos cuidado. Pensemos en cómo podríamos formular mejor esta pregunta para refinar los resultados.
+## Búsqueda de campos específicos con PyMARC
 
-Si en lugar de imprimir todo el registro, queremos ver sólo los campos MARC que contienen la cadena buscada, podemos añadir otro bucle.  
+La busqueda anterior imprime todos los campos the un registro.Esto podría devolver una gran cantidad de datos de poco interes para nosotors. Pensemos en cómo podríamos formular mejor esta pregunta para refinar los resultados.
+
+Si en lugar de imprimir todo el registro, queremos ver sólo los campos MARC que contienen el patrón de interes, podemos añadir otro bucle.
 
 Además, podríamos querer mostrar el identificador del registro junto con el campo coincidente:
 
@@ -52,24 +61,26 @@ Además, podríamos querer mostrar el identificador del registro junto con el ca
 # Importamos la biblioteca pymarc, que nos ayuda a leer archivos MARC
 import pymarc
 
+termino_de_busqueda = "California"
+
 # Definimos el nombre del archivo MARC que vamos a leer
-my_marc_file = "SELECCIONAR ARCHIVO"
+my_marc_file = "data/edited_69x_subject.mrc"
 
 # Abrimos el archivo en modo binario ('rb' significa 'read binary')
 with open(my_marc_file, 'rb') as data:
     
     # Creamos un lector de registros MARC a partir del archivo abierto
     reader = pymarc.MARCReader(data)
-    
+
     # Recorremos cada registro en el archivo MARC
     for record in reader:
-        if "New Zealand" in str(record):
+        if termino_de_busqueda in str(record):
+            # Iterar por cada campo del registro
             for field in record:
-                if "New Zealand" in field.value():
+                if termino_de_busqueda in field.value():
+                    # Si encontramos el patron devolvemos el BIB_ID y el campo
                     print(record['001'].value(), field)
-                    # Detener después del primer registro (para ejemplo)
-                quit()
-    
+
 ```
 
 ---
@@ -81,7 +92,7 @@ Podemos aplicar el mismo enfoque con bucles para acceder a los **subcampos** de 
 ```python
 for record in reader:
     for field in record:
-            print(field)
+        print(field)
         for subfield in field:
             print(subfield)
 ```
@@ -93,29 +104,23 @@ PyMARC ofrece varios **métodos abreviados** para acceder a campos y subcampos d
 ### `get_fields()`, `get_subfields()`
 
 ```{python}
-
-# Importamos la biblioteca pymarc, que nos ayuda a leer archivos MARC
 import pymarc
 
-# Definimos el nombre del archivo MARC que vamos a leer
-my_marc_file = "SELECCIONAR ARCHIVO"
+my_marc_file = "data/edited_69x_subject.mrc"
 
-# Abrimos el archivo en modo binario ('rb' significa 'read binary')
 with open(my_marc_file, 'rb') as data:
-    
-    # Creamos un lector de registros MARC a partir del archivo abierto
     reader = pymarc.MARCReader(data)
-    
-    # Recorremos cada registro en el archivo MARC
+
     for record in reader:
-        if "New Zealand" in str(record):
+        if "California" in str(record):
+            print(record.leader)
             my_245s = record.get_fields('245')
             for my_245 in my_245s:
                 subfields = my_245.get_subfields('a', 'b', 'c', 'f', 'g', 'h', 'k', 'n', 'p', 's', '6', '8')
                 for sub in subfields:
-                    print(sub)
-                # Detener después del primer registro (para ejemplo)
-                quit()
+                    print("  ",sub)
+                # Detener después del primer campo 245 del registro
+                break
 ```
 
 Para obtener esta lista de subcampos consultamos:  
@@ -124,12 +129,25 @@ https://www.loc.gov/marc/bibliographic/concise/bd245.html
 
 ### Acceder a indicadores de un campo, .indicator1 , .indicator2
 
-```python
-for record in reader:
-    print(record['245'])
-    print("Indicador 1 del campo 245:", record['245'].indicator1)
-    print("Indicador 2 del campo 245:", record['245'].indicator2)
-    quit()
+```{python}
+import pymarc
+
+my_marc_file = "data/edited_69x_subject.mrc"
+
+# Imprimir mas de un registro
+count=0
+max = 5
+with open(my_marc_file, 'rb') as data:
+    reader = pymarc.MARCReader(data)
+    
+    for record in reader:
+        print(record['245'])
+        print("Indicador 1 del campo 245:", record['245'].indicator1)
+        print("Indicador 2 del campo 245:", record['245'].indicator2)
+        count+=1
+        # Romper el ciclo al llegar al maximo
+        if count >= max:
+            break
 ```
 
 Podemos usar los indicadores como filtro:
@@ -184,8 +202,10 @@ for record in reader:
 ```{python}
 from pymarc import MARCReader
 
+archivo = "data/edited_69x_subject.mrc"
+
 # Abrimos el archivo MARC
-with open("TU_ARCHIVO.marc", "rb") as data:
+with open(archivo, "rb") as data:
     reader = MARCReader(data)
 
     # Iteramos sobre los registros
@@ -205,7 +225,7 @@ with open("TU_ARCHIVO.marc", "rb") as data:
                 print(f"\tTag #: {my_field.tag}  Indicador 1: {ind_1}  Indicador 2: {ind_2}")
             except AttributeError:
                 # Si el campo no tiene indicadores (como los de control), solo mostramos el tag
-                print(f"\tTag #: {my_field.tag} (campo de control)")
+                print(f"\tTag #: {my_field.tag} (no posee indicadores)")
 
             # Recorremos los subcampos (si existen)
             if hasattr(my_field, '__iter__'):

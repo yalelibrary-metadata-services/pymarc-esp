@@ -1,5 +1,5 @@
 ---
-title: Introducción Básica a PyMarc
+title: Introducción a PyMarc
 objectives:
 - ¿Qué es MARC?
 - ¿Dónde encontrar recursos útiles sobre MARC?
@@ -97,7 +97,7 @@ Para leer archivos MARC, analicemos el siguiente script:
 import pymarc
 
 # Definimos el nombre del archivo MARC que vamos a leer
-my_marc_file = "SELECCIONAR ARCHIVO"
+my_marc_file = "data/edited_69x_subject.mrc"
 
 # Abrimos el archivo en modo binario ('rb' significa 'read binary')
 with open(my_marc_file, 'rb') as data:
@@ -111,7 +111,7 @@ with open(my_marc_file, 'rb') as data:
         # Imprimimos el título del registro (extraído del campo 245)
         print(record)
         # Detener después del primer registro (para ejemplo)
-        quit()
+        break
 ```
 
 
@@ -133,7 +133,7 @@ Es útil entender la estructura de los objetos de datos que estamos viendo cuand
 
 Observa que la primera línea de un registro MARC en formato legible por humanos comienza con un signo de igual (=). Por ejemplo, la primera línea podría ser:
 
-```{yaml}
+```bash
 =LDR  00912cam a2200301 a 4500
 ```
 
@@ -145,7 +145,7 @@ Observa que la primera línea de un registro MARC en formato legible por humanos
 
 - Todos los demás campos MARC usan etiquetas numéricas de tres dígitos, por ejemplo:
 
-```{bash}
+```bash
 =245  10$aLarger than life :$bthe story of Eric Baume /$cby Arthur Manning.
 ```
 
@@ -179,7 +179,7 @@ En MARC, los campos se dividen en dos categorías principales:
 from pymarc import MARCReader  # Importamos la clase MARCReader desde la biblioteca pymarc
 
 # Definimos el nombre del archivo MARC que queremos leer
-my_marc_file = "SELECIONAR MARC"
+my_marc_file = "data/edited_69x_subject.mrc"
 
 # Abrimos el archivo en modo lectura binaria ('rb')
 with open(my_marc_file, 'rb') as data:
@@ -204,9 +204,11 @@ Para hacer esto, le decimos a Python cuál es el nombre o la etiqueta del campo 
 
 
 ```{python}
-
+#| error: true
+from pymarc import MARCReader
+from sys import stderr
 # Definimos el nombre del archivo MARC que queremos leer
-my_marc_file = "SELECIONAR MARC"
+my_marc_file = "data/edited_69x_subject.mrc"
 
 # Abrimos el archivo en modo lectura binaria ('rb')
 with open(my_marc_file, 'rb') as data:
@@ -216,9 +218,9 @@ with open(my_marc_file, 'rb') as data:
     # Iteramos sobre cada registro del archivo
     for record in reader:
         # Imprimimos el contenido completo del registro en formato legible
-        print(record)['245']
+        print(record['245'])
         # Detener después del primer registro (para ejemplo)
-        quit()
+        break
 ```
 
 En esta línea de código `print(record)['245']` le estamos pidiendo a PyMARC que:
@@ -295,7 +297,7 @@ Si queremos **extraer varios campos MARC específicos** (por ejemplo, autor, tí
 from pymarc import MARCReader
 
 # Definimos el nombre del archivo MARC que queremos leer
-my_marc_file = "SELECCIONAR MARC"
+my_marc_file = "data/edited_69x_subject.mrc"
 
 # Abrimos el archivo en modo lectura binaria ('rb')
 with open(my_marc_file, 'rb') as data:
@@ -304,26 +306,31 @@ with open(my_marc_file, 'rb') as data:
     # Iteramos sobre cada registro
     for record in reader:
         # Extraemos e imprimimos varios campos MARC
-        print(record['100'])  # Autor principal
-        print(record['245'])  # Título
-        print(record['300'])  # Descripción física
-        print(record['700'])  # Autor adicional (si lo hay)
+        try:
+            print(record.leader)
+            print(record['100'])  # Autor principal
+            print(record['245'])  # Título
+            print(record['300'])  # Descripción física
+            print(record['700'])  # Autor adicional (si lo hay)
+        except KeyError as error:
+            print(f"{record.leader} -> {type(error)}")
+            continue
         # Detener después del primer registro (para ejemplo)
-        quit()
+        break
 ```
 
 **Nota:**
 Cada línea print(record['XXX']) intenta acceder a un campo específico por su etiqueta MARC.
 
-Si el campo no existe en ese registro, PyMARC devolverá `None`.
+Si el campo no existe en ese registro, PyMARC levantará un error de tipo `KeyError`.
 
-También puedes usar la función `.get_fields()` para obtener varios campos como una lista:
+Alternativamente, puedes usar la función `.get_fields()` para obtener varios campos en un objecto iterable sin levantar ningún error:
 
 ```{python}
 from pymarc import MARCReader
 
 # Definimos el nombre del archivo MARC que queremos leer
-my_marc_file = "SELECCIONAR MARC"
+my_marc_file = "data/edited_69x_subject.mrc"
 
 # Abrimos el archivo en modo lectura binaria ('rb')
 with open(my_marc_file, 'rb') as data:
@@ -331,18 +338,18 @@ with open(my_marc_file, 'rb') as data:
     
     # Iteramos sobre cada registro
     for record in reader:
-        campos = record.get_fields('100', '245', '300', '700')
-            for campo in campos:
+        campos = record.get_fields('100','245', '300', '700')
+        for campo in campos:
             print(campo)
         # Detener después del primer registro (para ejemplo)
-        quit()
+        break
 ```
 
 
 Esto es útil cuando quieres recorrer dinámicamente los campos encontrados en el registro.
 
 
-::: {.callout-caution title= "Ejercicio" collapse="true"}
+::: {.callout-caution title="Ejercicio" collapse="true" }
 
 Descarga el archivo MARC presentado en esta unidad. Intenta: 
 - Leerlo
@@ -360,25 +367,29 @@ Podemos usar el mismo método de "clave" (`key`) para acceder a los **subcampos*
 **Ejemplo:**
 
 ```{python}
-
+#| error: true
 from pymarc import MARCReader
 
 # Definimos el nombre del archivo MARC que queremos leer
-my_marc_file = "SELECCIONAR MARC"
+my_marc_file = "data/edited_69x_subject.mrc"
 
 # Abrimos el archivo en modo lectura binaria ('rb')
 with open(my_marc_file, 'rb') as data:
     reader = MARCReader(data)
     
     # Iteramos sobre cada registro
-    for record in reader:
-        # Extraemos e imprimimos varios campos MARC
-        print("Subcampo 'a':", record['245']['a'])
-        print("Subcampo 'b':", record['245']['b'])
-        print("Subcampo 'c':", record['245']['c'])
-        # Detener después del primer registro (para ejemplo)
-        quit()
-    
+    try:
+        for record in reader:
+            # Extraemos e imprimimos varios campos MARC
+            print("Subcampo 'a':", record['245']['a'])
+            print("Subcampo 'b':", record['245']['b'])
+            print("Subcampo 'c':", record['245']['c'])
+            # Detener después del primer registro (para ejemplo)
+            break
+    except KeyError as error:
+        print(error)
+        # raise error
+        pass
 ```
 
 **¿Qué está ocurriendo aquí?**
@@ -389,19 +400,21 @@ En cada línea del bloque `print(...)` le estamos pidiendo a Python que haga lo 
 - Localice el campo que tiene la etiqueta '245' (es decir, el campo de título en MARC).
 - Dentro de ese campo, acceda al subcampo que tenga la letra `a`, `b` o `c`.
 
-Esto funciona porque en PyMARC, cada campo MARC también se comporta como un pequeño diccionario, donde los subcampos están indexados por sus letras.
+Observa que cada campo de un registro se comporta como un diccionario de subcampos.
 
 Este método funciona solo si el campo y los subcampos existen.
 Si algún subcampo está ausente en un registro, obtendrás un error del tipo `KeyError`.
 
-Para evitar eso, puedes usar una forma más segura:
+**NOTA:** El código anterior fracasa cuando trata de obtener el subcampo `b` que no está presente en el campo `245` del registro.
+
+Para evitar eso, puedes usar el método `.get_subfields`, una forma más segura de accesso:
 
 ```{python}
 
 from pymarc import MARCReader
 
 # Definimos el nombre del archivo MARC que queremos leer
-my_marc_file = "SELECCIONAR MARC"
+my_marc_file = "data/edited_69x_subject.mrc"
 
 # Abrimos el archivo en modo lectura binaria ('rb')
 with open(my_marc_file, 'rb') as data:
@@ -410,12 +423,12 @@ with open(my_marc_file, 'rb') as data:
     # Iteramos sobre cada registro
     for record in reader:
         titulo = record['245']
-            if titulo:
-                print("Subcampo 'a':", titulo.get_subfields('a'))
-                print("Subcampo 'b':", titulo.get_subfields('b'))
-                print("Subcampo 'c':", titulo.get_subfields('c'))
-            # Detener después del primer registro (para ejemplo)
-        quit()
+        if titulo:
+            print("Subcampo 'a':", titulo.get_subfields('a'))
+            print("Subcampo 'b':", titulo.get_subfields('b'))
+            print("Subcampo 'c':", titulo.get_subfields('c'))
+        # Detener después del primer registro (para ejemplo)
+        break
 ```
 
 Esto devuelve listas con los subcampos encontrados (o listas vacías si no existen).
@@ -445,13 +458,14 @@ PyMARC incluye métodos “accesibles” como `.title()`, que devuelve el conten
 Puedes combinar varios métodos, por ejemplo:
 
  ```{python}
-from pymarc import MARCReader
+
+from  pymarc import MARCReader
 
 # Definimos el nombre del archivo MARC que queremos leer
-my_marc_file = "SELECCIONAR MARC"
+my_marc_file = "data/edited_69x_subject.mrc"
 
 # Abrimos el archivo en modo lectura binaria ('rb')
-with open(my_marc_file, 'rb') as data:
+with  open(my_marc_file, 'rb') as data:
     reader = MARCReader(data)
 
     # Iteramos sobre cada registro
@@ -480,9 +494,9 @@ with open(my_marc_file, 'rb') as data:
         print()
 
         print("Método record.title():")
-        print(record.title())
+        print(record.title)
         print("Tipo del resultado de record.title():")
-        print(type(record.title()))
+        print(type(record.title))
         print()
 
         # Mostramos todos los campos 650 y 651 (materias)
@@ -500,7 +514,7 @@ with open(my_marc_file, 'rb') as data:
             for sub in subcampos:
                 print(sub)
         # Detener después del primer registro (para ejemplo)
-        quit()
+        break
 
  ```
 
