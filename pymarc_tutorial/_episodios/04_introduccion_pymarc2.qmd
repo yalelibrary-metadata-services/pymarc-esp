@@ -16,7 +16,7 @@ keypoints:
 
 Vamos a seguir explorando cómo realizar búsquedas.
 
-## Búsqueda General
+## Búsqueda general
 
 **¿Qué pasa si queremos encontrar cualquier registro que contenga un termino en particular?**  
 
@@ -51,7 +51,7 @@ with open(my_marc_file, 'rb') as data:
   
 ```
 
-## Búsqueda de Campos Específicos con PyMARC
+## Búsqueda de campos específicos con PyMARC
 
 La búsqueda anterior imprime todos los campos de un registro. Esto podría devolver una gran cantidad de datos de poco interés para nosotros. Pensemos en cómo podríamos formular mejor esta pregunta para refinar los resultados.
 
@@ -87,7 +87,7 @@ with open(my_marc_file, 'rb') as data:
 
 ---
 
-## Subcampos y Bucles Anidados
+## Subcampos y bucles anidados
 
 Podemos aplicar el mismo enfoque con bucles para acceder a los **subcampos** de cualquier campo que los tenga:
 
@@ -99,7 +99,7 @@ for record in reader:
             print(subfield)
 ```
 
-## Métodos Especiales de PyMARC
+## Métodos especiales de PyMARC
 
 PyMARC ofrece varios **métodos abreviados** para acceder a campos y subcampos de forma elegante.
 

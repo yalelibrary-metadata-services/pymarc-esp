@@ -14,7 +14,7 @@ keypoints:
 
 - Sample Data: [edited_69x_subject.mrc](data/edited_69x_subject.mrc)
 
-- Enlace al google colab (python Basics, PyMarc Basics)
+- Enlace al Google Colab (Python Basics, PyMarc Basics)
 
 ## Copiando registros para editar
 
@@ -58,9 +58,9 @@ with open(my_marc_file, 'rb') as data:
 ## Editar información existente en un registro
 
 Veamos cómo podemos cambiar una pieza de información ya existente dentro de un registro.  
-Actualmente, en nuestro registro podemos ver en el campo `100` una persona de nombre "Gray, Dorothy"
+Actualmente, en nuestro registro podemos ver en el campo `100` una persona de nombre "Gray, Dorothy".
 
-Como ejercicio, imaginemos que nos informan que en realidad no es el nombre indicado, sino que lo es su hermana gemela: Gray, Amber.  
+Como ejercicio, imaginemos que nos informan que en realidad no es el nombre indicado, sino que lo es su hermana gemela: "Gray, Amber".
 
 ¡Necesitamos actualizar el registro para que sea correcto!
 
@@ -98,7 +98,7 @@ with open(my_marc_file, 'rb') as data:
 
 ::: {.callout-caution title="Ejercicio" collapse="true" }
 
-¿Cómo cambiarías la fecha de nacimiento en el subcampo `d` a "1920-"?
+¿Cómo cambiarías la fecha de nacimiento en el subcampo `$d` a "1920-"?
 
 ```{python}
 my_record['100']['d'] = "1920-"
@@ -129,7 +129,7 @@ with open(my_marc_file, 'rb') as data:
 
 ## Eliminando subcampos específicos
 
-Eliminar subcampo `'d'` del campo `100`:
+Eliminar subcampo `$d` del campo `100`:
 
 ```{python}
 from pymarc import MARCReader
@@ -296,7 +296,7 @@ print(nuevo_registro)
 ## Recursos
 
 - [PyMARC docs](https://pymarc.readthedocs.io/)
-- [Estructura MARC21](https://www.loc.gov/marc/specifications/specrecstruc.html)
+- [Estructura MARC 21](https://www.loc.gov/marc/specifications/specrecstruc.html)
 
 ## Otros ejemplos
 
