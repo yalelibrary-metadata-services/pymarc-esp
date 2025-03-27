@@ -216,7 +216,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="busqueda-general">Busqueda General</h2>
 <p><strong>¿Qué pasa si queremos encontrar cualquier registro que contenga un termino en particular?</strong></p>
 <p>Sugerencias: * California * San Francisco * lesbian</p>
-<div id="1595797d" class="cell" data-execution_count="1">
+<div id="6bc35f3b" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Importamos la biblioteca pymarc, que nos ayuda a leer archivos MARC</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pymarc</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -324,7 +324,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>La busqueda anterior imprime todos los campos the un registro.Esto podría devolver una gran cantidad de datos de poco interes para nosotors. Pensemos en cómo podríamos formular mejor esta pregunta para refinar los resultados.</p>
 <p>Si en lugar de imprimir todo el registro, queremos ver sólo los campos MARC que contienen el patrón de interes, podemos añadir otro bucle.</p>
 <p>Además, podríamos querer mostrar el identificador del registro junto con el campo coincidente:</p>
-<div id="55eb1f98" class="cell" data-execution_count="2">
+<div id="b7c547e0" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Importamos la biblioteca pymarc, que nos ayuda a leer archivos MARC</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pymarc</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -388,7 +388,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>PyMARC ofrece varios <strong>métodos abreviados</strong> para acceder a campos y subcampos de forma elegante.</p>
 <section id="get_fields-get_subfields" class="level3">
 <h3 class="anchored" data-anchor-id="get_fields-get_subfields"><code>get_fields()</code>, <code>get_subfields()</code></h3>
-<div id="449b91dc" class="cell" data-execution_count="3">
+<div id="93a54d5b" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pymarc</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>my_marc_file <span class="op">=</span> <span class="st">"data/edited_69x_subject.mrc"</span></span>
@@ -447,7 +447,7 @@ https://www.loc.gov/marc/bibliographic/concise/bd245.html</p>
 </section>
 <section id="acceder-a-indicadores-de-un-campo-.indicator1-.indicator2" class="level3">
 <h3 class="anchored" data-anchor-id="acceder-a-indicadores-de-un-campo-.indicator1-.indicator2">Acceder a indicadores de un campo, .indicator1 , .indicator2</h3>
-<div id="6b112e1e" class="cell" data-execution_count="4">
+<div id="27f7e1dc" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pymarc</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>my_marc_file <span class="op">=</span> <span class="st">"data/edited_69x_subject.mrc"</span></span>
@@ -522,7 +522,7 @@ Indicador 2 del campo 245: 0</code></pre>
 </section>
 <section id="construyendo-un-parser-básico" class="level2">
 <h2 class="anchored" data-anchor-id="construyendo-un-parser-básico">Construyendo un parser básico</h2>
-<div id="4e43157c" class="cell" data-execution_count="5">
+<div id="df5440d3" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pymarc <span class="im">import</span> MARCReader</span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>archivo <span class="op">=</span> <span class="st">"data/edited_69x_subject.mrc"</span></span>
