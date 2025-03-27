@@ -1,0 +1,516 @@
+---
+title: Introducción Básica a PyMarc
+objectives:
+- ¿Qué es MARC?
+- ¿Dónde encontrar recursos útiles sobre MARC?
+- Comprender la estructura básica de un archivo MARC en PyMARC
+keypoints:
+- Sabemos dónde encontrar recursos que describen los registros y campos MARC
+- Sabemos cómo identificar las partes que componen un registro y un campo MARC
+
+---
+
+- Download marc files
+- Enlace al google colab (python Basics, PyMarc Basics)
+
+
+## ¿Qué es MARC?
+
+**MARC** es el acrónimo de **MA**chine-**R**eadable **C**ataloging (Catalogación legible por máquina). Define un formato de datos que surgió de una iniciativa liderada por la Biblioteca del Congreso de EE.UU. hace casi cuarenta años.  
+
+Este formato proporciona un mecanismo para que los ordenadores puedan intercambiar, usar e interpretar información bibliográfica. Los elementos de datos de MARC forman la base de la mayoría de los catálogos de bibliotecas utilizados actualmente.
+
+En los años 80 pasó a llamarse **USMARC**, y a fines de los años 90 se convirtió en **MARC 21**.
+
+**Recursos útiles:**
+- Sitio oficial de MARC: [https://www.loc.gov/marc/](https://www.loc.gov/marc/)
+- Términos y definiciones MARC: [https://www.loc.gov/marc/umb/um01to06.html#part3](https://www.loc.gov/marc/umb/um01to06.html#part3)
+- Formato MARC 21 para datos bibliográficos (completo y resumido): [http://www.loc.gov/marc/bibliographic/](http://www.loc.gov/marc/bibliographic/)
+
+
+## ¿Qué es PyMarc?
+
+PyMARC es una biblioteca de Python diseñada para leer, escribir y manipular registros MARC (Machine-Readable Cataloging).
+
+Es muy útil para bibliotecarios, archivistas, desarrolladores y cualquier persona que necesite trabajar con catálogos bibliográficos en formato MARC, especialmente en contextos donde se desea automatizar tareas o integrar datos MARC en otros sistemas.
+
+¿Qué hace exactamente PyMARC?
+Con PyMARC puedes:
+
+ - Leer archivos MARC (.mrc o .marc)
+ - Acceder a campos y subcampos específicos (como el título, autor, etc.)
+ - Extraer datos y convertirlos a otros formatos (como JSON o CSV)
+ - Crear nuevos registros MARC desde cero
+ - Editar registros existentes
+ - Guardar los cambios en archivos MARC
+
+## ¿Por qué usar PyMARC en lugar de hacerlo manualmente?
+
+El formato MARC es complejo y binario, no es fácil de leer o procesar sin herramientas especializadas. PyMARC entiende esa estructura y nos da una forma clara de interactuar con ella usando código Python sencillo.
+
+## ¿Cuándo usar PyMARC y cuándo usar MarcEdit?
+
+| Tarea o Necesidad                                                             | PyMARC 🐍 | MarcEdit 🛠️ |
+|------------------------------------------------------------------------------|:---------:|:-----------:|
+| Automatizar tareas repetitivas o por lotes                                   | ✅        | 🚫          |
+| Procesar registros MARC sin interfaz gráfica (ideal para servidores)         | ✅        | 🚫          |
+| Extraer campos y convertir a CSV, JSON, Excel, etc. desde código             | ✅        | 🚫          |
+| Integrar con APIs, bases de datos, o herramientas como pandas                | ✅        | 🚫          |
+| Crear scripts reproducibles o notebooks para talleres                        | ✅        | 🚫          |
+| Editar visualmente registros MARC uno por uno                                | 🚫        | ✅          |
+| Usar sin saber programar (interfaz amigable)                                 | 🚫        | ✅          |
+| Validar registros MARC con reglas MARC21                                     | 🚫        | ✅          |
+| Convertir entre MARC, MARCXML, MODS, Dublin Core                             | ✅ (Solo JSON y MARCXML)      | ✅          |
+| Cargar datos desde hojas de cálculo y exportarlos como MARC                  | ✅        | ✅          |
+| Trabajar con autoridades (VIAF, Library of Congress, etc.)                   | 🚫        | ✅          |
+| Previsualizar y editar campos de forma masiva con herramientas visuales      | 🚫        | ✅          |
+
+> 🐍 Usa **PyMARC** si necesitas automatizar, integrar con otras plataformas y transformar de MARC a otro esquema de metadatos.
+> 🛠️ Usa **MarcEdit** si prefieres trabajar visualmente, sin programar, o para tareas de catalogación rápida.
+
+**Un ejemplo concreto:**
+
+Quieres extraer todos los títulos y números de control de 10,000 registros MARC y guardarlos en un CSV.
+
+- Con MarcEdit: abrir archivo > convertir a MARC-XML > extraer campos con una herramienta > guardar CSV (todo manual).
+
+- Con PyMARC: un pequeño script de 10 líneas hace todo eso automáticamente.
+
+**¿Y qué no puede hacer PyMARC tan fácilmente?**
+
+Justo al revés, MarcEdit:
+
+- Tiene una interfaz visual amigable (no necesitas saber código).
+
+- Permite hacer validaciones y conversiones MARC <-> MARCXML fácilmente.
+
+- Es excelente para tareas pequeñas o puntuales.
+
+
+## Leer archivos MARC con PyMARC
+
+Para leer archivos MARC, analicemos el siguiente script: 
+
+```{python}
+
+# Importamos la biblioteca pymarc, que nos ayuda a leer archivos MARC
+import pymarc
+
+# Definimos el nombre del archivo MARC que vamos a leer
+my_marc_file = "SELECCIONAR ARCHIVO"
+
+# Abrimos el archivo en modo binario ('rb' significa 'read binary')
+with open(my_marc_file, 'rb') as data:
+    
+    # Creamos un lector de registros MARC a partir del archivo abierto
+    reader = pymarc.MARCReader(data)
+    
+    # Recorremos cada registro en el archivo MARC
+    for record in reader:
+        
+        # Imprimimos el título del registro (extraído del campo 245)
+        print(record)
+        # Detener después del primer registro (para ejemplo)
+        quit()
+```
+
+
+Este pequeño script hace lo siguiente:
+
+- Importa la biblioteca pymarc, que nos permite trabajar con registros MARC en Python.
+
+- Define el nombre del archivo que contiene nuestros registros MARC de ejemplo.
+
+- Abre el archivo en modo binario ('rb') porque los archivos MARC no son archivos de texto comunes.
+
+- Usa MARCReader para leer el contenido del archivo y lo recorre registro por registro.
+
+## Comprendiendo los campos MARC en PyMARC
+
+Es útil entender la estructura de los objetos de datos que estamos viendo cuando leemos un registro MARC, y cómo se relacionan con el formato MARC tradicional que se utiliza en bibliotecas.
+
+**¿Qué estamos viendo?**
+
+Observa que la primera línea de un registro MARC en formato legible por humanos comienza con un signo de igual (=). Por ejemplo, la primera línea podría ser:
+
+```{yaml}
+=LDR  00912cam a2200301 a 4500
+```
+
+- El signo igual `=` indica que se trata de una etiqueta de campo o tag.
+
+- Los siguientes tres caracteres (LDR) nos dicen qué campo es.
+
+- En este caso, LDR significa leader o líder, una sección especial que contiene información codificada sobre el registro completo (como su tipo, estatus, etc.).
+
+- Todos los demás campos MARC usan etiquetas numéricas de tres dígitos, por ejemplo:
+
+```{bash}
+=245  10$aLarger than life :$bthe story of Eric Baume /$cby Arthur Manning.
+```
+
+- Aquí 245 es el número de campo.
+
+- Los dos dígitos que siguen (10) son los indicadores, que modifican el significado del campo.
+
+- Lo que sigue son los subcampos, precedidos por el símbolo $. En el ejemplo anterior serian los subcambos $a, $b y $c .
+
+Dedica un momento a revisar las especificaciones MARC para este campo y compáralas con los datos que tenemos en este registro.
+
+http://www.loc.gov/marc/bibliographic/bd245.html
+
+
+## ¿Qué tipos de campos hay?
+
+En MARC, los campos se dividen en dos categorías principales:
+
+| Tipo de campo        | Rango de etiquetas | Características principales |
+|----------------------|--------------------|------------------------------|
+| **Campos de control** | 001–009            | No tienen indicadores ni subcampos. Contienen información fija. |
+| **Campos de datos**   | 010 en adelante     | Incluyen indicadores y subcampos, más complejos y ricos en contenido. |
+
+[Guía de campos de control en MARC](http://www.loc.gov/marc/bibliographic/bd00x.html)
+
+
+## Accesando los campos de un archivo MARC
+
+```{python}
+
+from pymarc import MARCReader  # Importamos la clase MARCReader desde la biblioteca pymarc
+
+# Definimos el nombre del archivo MARC que queremos leer
+my_marc_file = "SELECIONAR MARC"
+
+# Abrimos el archivo en modo lectura binaria ('rb')
+with open(my_marc_file, 'rb') as data:
+    # Creamos un lector MARC que puede recorrer los registros en el archivo
+    reader = MARCReader(data)
+    
+    # Iteramos sobre cada registro del archivo
+    for record in reader:
+        # Imprimimos el contenido completo del registro en formato legible
+        print(record)
+        # Detener después del primer registro (para ejemplo)
+        quit()
+
+```
+
+**¿Qué estamos haciendo aquí?**
+`record` es un objeto creado por PyMARC que representa un solo registro MARC.
+
+Podemos utilizar este objeto para acceder solamente a los campos que nos interesan.
+
+Para hacer esto, le decimos a Python cuál es el nombre o la etiqueta del campo MARC que queremos extraer.
+
+
+```{python}
+
+# Definimos el nombre del archivo MARC que queremos leer
+my_marc_file = "SELECIONAR MARC"
+
+# Abrimos el archivo en modo lectura binaria ('rb')
+with open(my_marc_file, 'rb') as data:
+    # Creamos un lector MARC que puede recorrer los registros en el archivo
+    reader = MARCReader(data)
+    
+    # Iteramos sobre cada registro del archivo
+    for record in reader:
+        # Imprimimos el contenido completo del registro en formato legible
+        print(record)['245']
+        # Detener después del primer registro (para ejemplo)
+        quit()
+```
+
+En esta línea de código `print(record)['245']` le estamos pidiendo a PyMARC que:
+
+- Busque dentro del objeto record un campo cuya etiqueta sea 245 (que corresponde a la declaración de título del recurso).
+
+- Si lo encuentra, lo imprime.
+
+Este método es muy útil cuando trabajamos con muchos campos pero solo necesitamos unos específicos, como el título (245), el autor (100), o materias (650).
+
+
+### Comprendiendo los tipos de datos y objetos en Python
+
+El objeto `record` que crea PyMARC **parece** comportarse como un diccionario de Python (`dict`).  
+Y se accede a sus campos usando la sintaxis de corchetes, como:
+
+`record['245']`
+
+Sin embargo, si le preguntamos directamente a Python qué tipo de objeto es usando la función type(), obtenemos algo más específico:
+
+`<class 'pymarc.record.Record'>`
+
+Esto nos dice que record es una instancia de una clase llamada Record, definida por la biblioteca pymarc.
+
+**¿Por qué es importante saber esto?**
+
+En Python, cada objeto pertenece a un tipo de dato.
+
+Saber qué tipo de dato estamos usando nos ayuda a:
+
+- Acceder correctamente a sus partes internas (como campos o métodos).
+
+- Prevenir errores.
+
+- Usar las funciones adecuadas con cada tipo de dato.
+
+La sintaxis con corchetes (record['245']) es una pista visual que recuerda a un diccionario (dict), donde una clave devuelve un valor:
+
+```python
+mi_diccionario = {'clave': 'valor'}
+print(mi_diccionario['clave'])  # Imprime: valor
+```
+
+Aunque `record` no es exactamente un diccionario, se comporta de manera similar en muchos aspectos, porque la clase `Record` fue diseñada para imitar ese comportamiento.
+
+**Recursos para seguir aprendiendo**
+
+No vamos a profundizar en esta lección en cómo funcionan las clases o los diccionarios, pero si te interesa, hay muchos recursos gratuitos donde puedes aprender más. [Tutoriales de Python](https://www.w3schools.com/python/default.asp)
+
+**Comparación visual: Diccionario Python vs Objeto `record` de PyMARC**
+
+| Concepto              | Diccionario en Python 🧺 | Objeto `record` en PyMARC 📚 |
+|------------------------|--------------------------|-------------------------------|
+| **Tipo de dato**      | `dict`                   | `pymarc.record.Record`        |
+| **Creación**          | `mi_dic = {'245': 'Título'}` | `record = MARCReader(data)` |
+| **Acceso a datos**    | `mi_dic['245']`          | `record['245']`               |
+| **Qué devuelve**      | El valor asociado a la clave | El campo MARC completo (con subcampos e indicadores) |
+| **Pistas visuales**   | Uso de corchetes `[]`    | También usa corchetes `[]`    |
+| **Métodos útiles**    | `.keys()`, `.values()`   | `.get_fields()`, `.title()`   |
+| **Es realmente un diccionario?** | ✅ Sí            | ❌ No, pero se comporta similar |
+| **Más información**   | [docs.python.org](https://docs.python.org/3/tutorial/datastructures.html#dictionaries) | [PyMARC docs](https://pymarc.readthedocs.io/) |
+
+**¿Por qué importa esto?**
+
+Saber cómo acceder a la información dentro de un objeto es clave para trabajar con MARC en Python.  
+Aunque `record` no sea técnicamente un diccionario, **PyMARC lo diseñó para que se sienta como uno**, facilitando su uso para principiantes.
+
+
+### Cómo extraer múltiples campos en PyMARC
+
+Si queremos **extraer varios campos MARC específicos** (por ejemplo, autor, título, descripción física, autor adicional), podemos usar un bucle y acceder a cada uno individualmente dentro del registro.
+
+```{python}
+from pymarc import MARCReader
+
+# Definimos el nombre del archivo MARC que queremos leer
+my_marc_file = "SELECCIONAR MARC"
+
+# Abrimos el archivo en modo lectura binaria ('rb')
+with open(my_marc_file, 'rb') as data:
+    reader = MARCReader(data)
+    
+    # Iteramos sobre cada registro
+    for record in reader:
+        # Extraemos e imprimimos varios campos MARC
+        print(record['100'])  # Autor principal
+        print(record['245'])  # Título
+        print(record['300'])  # Descripción física
+        print(record['700'])  # Autor adicional (si lo hay)
+        # Detener después del primer registro (para ejemplo)
+        quit()
+```
+
+**Nota:**
+Cada línea print(record['XXX']) intenta acceder a un campo específico por su etiqueta MARC.
+
+Si el campo no existe en ese registro, PyMARC devolverá `None`.
+
+También puedes usar la función `.get_fields()` para obtener varios campos como una lista:
+
+```{python}
+from pymarc import MARCReader
+
+# Definimos el nombre del archivo MARC que queremos leer
+my_marc_file = "SELECCIONAR MARC"
+
+# Abrimos el archivo en modo lectura binaria ('rb')
+with open(my_marc_file, 'rb') as data:
+    reader = MARCReader(data)
+    
+    # Iteramos sobre cada registro
+    for record in reader:
+        campos = record.get_fields('100', '245', '300', '700')
+            for campo in campos:
+            print(campo)
+        # Detener después del primer registro (para ejemplo)
+        quit()
+```
+
+
+Esto es útil cuando quieres recorrer dinámicamente los campos encontrados en el registro.
+
+
+::: {.callout-caution title= "Ejercicio" collapse="true"}
+
+Descarga el archivo MARC presentado en esta unidad. Intenta: 
+- Leerlo
+- Pedir multiples campos
+
+Imprime cada una utilizando la función `print`.
+
+:::
+
+
+## Acceder a subcampos MARC específicos con PyMARC
+
+Podemos usar el mismo método de "clave" (`key`) para acceder a los **subcampos** dentro de un campo MARC específico.
+
+**Ejemplo:**
+
+```{python}
+
+from pymarc import MARCReader
+
+# Definimos el nombre del archivo MARC que queremos leer
+my_marc_file = "SELECCIONAR MARC"
+
+# Abrimos el archivo en modo lectura binaria ('rb')
+with open(my_marc_file, 'rb') as data:
+    reader = MARCReader(data)
+    
+    # Iteramos sobre cada registro
+    for record in reader:
+        # Extraemos e imprimimos varios campos MARC
+        print("Subcampo 'a':", record['245']['a'])
+        print("Subcampo 'b':", record['245']['b'])
+        print("Subcampo 'c':", record['245']['c'])
+        # Detener después del primer registro (para ejemplo)
+        quit()
+    
+```
+
+**¿Qué está ocurriendo aquí?**
+
+En cada línea del bloque `print(...)` le estamos pidiendo a Python que haga lo siguiente:
+
+- Busque dentro del objeto llamado record.
+- Localice el campo que tiene la etiqueta '245' (es decir, el campo de título en MARC).
+- Dentro de ese campo, acceda al subcampo que tenga la letra `a`, `b` o `c`.
+
+Esto funciona porque en PyMARC, cada campo MARC también se comporta como un pequeño diccionario, donde los subcampos están indexados por sus letras.
+
+Este método funciona solo si el campo y los subcampos existen.
+Si algún subcampo está ausente en un registro, obtendrás un error del tipo `KeyError`.
+
+Para evitar eso, puedes usar una forma más segura:
+
+```{python}
+
+from pymarc import MARCReader
+
+# Definimos el nombre del archivo MARC que queremos leer
+my_marc_file = "SELECCIONAR MARC"
+
+# Abrimos el archivo en modo lectura binaria ('rb')
+with open(my_marc_file, 'rb') as data:
+    reader = MARCReader(data)
+    
+    # Iteramos sobre cada registro
+    for record in reader:
+        titulo = record['245']
+            if titulo:
+                print("Subcampo 'a':", titulo.get_subfields('a'))
+                print("Subcampo 'b':", titulo.get_subfields('b'))
+                print("Subcampo 'c':", titulo.get_subfields('c'))
+            # Detener después del primer registro (para ejemplo)
+        quit()
+```
+
+Esto devuelve listas con los subcampos encontrados (o listas vacías si no existen).
+
+## Métodos útiles en PyMARC para acceder a campos MARC
+
+El objeto de tipo `record` que PyMARC crea ofrece varios métodos útiles para acceder a los datos.
+
+Uno de ellos es `.value()`, que **devuelve el contenido completo del campo como texto plano**, sin subcampos (`$`) ni indicadores.
+
+PyMARC incluye métodos “accesibles” como `.title()`, que devuelve el contenido del campo 245 ya procesado como un título legible para humanos.
+
+
+**Métodos comunes de PyMARC explicados**
+
+| Método                         | Se usa con...          | ¿Qué hace?                                                                 | Tipo de dato que devuelve        | Ejemplo                                  |
+|-------------------------------|------------------------|----------------------------------------------------------------------------|----------------------------------|------------------------------------------|
+| `record['245']`               | `record`               | Accede a un campo MARC específico por etiqueta                            | `Field`                          | `record['245']`                          |
+| `record['245']['a']`          | `Field`                | Devuelve el contenido del subcampo `'a'` del campo                        | `str` (texto)                    | `record['245']['a']`                     |
+| `record.get_fields('245')`    | `record`               | Devuelve una lista de todos los campos con esa etiqueta                   | `list` de `Field`                | `record.get_fields('245')`              |
+| `field.value()`               | `Field`                | Devuelve todo el contenido del campo como texto plano                     | `str`                            | `record['245'].value()`                 |
+| `field.get_subfields('a')`    | `Field`                | Devuelve una lista de todos los subcampos con esa etiqueta                | `list` de `str`                  | `record['245'].get_subfields('a')`      |
+| `record.title()`              | `record`               | Devuelve el título procesado como texto legible (usa campo 245)          | `str`                            | `record.title()`                        |
+| `record['001'].value()`       | `record`               | Devuelve el número de control del registro (campo 001) como texto         | `str`                            | `record['001'].value()`                 |
+| `type(objeto)`                | Cualquier objeto       | Muestra el tipo de dato del objeto                                        | `type`                           | `type(record['245'])`                   |
+
+Puedes combinar varios métodos, por ejemplo:
+
+ ```{python}
+from pymarc import MARCReader
+
+# Definimos el nombre del archivo MARC que queremos leer
+my_marc_file = "SELECCIONAR MARC"
+
+# Abrimos el archivo en modo lectura binaria ('rb')
+with open(my_marc_file, 'rb') as data:
+    reader = MARCReader(data)
+
+    # Iteramos sobre cada registro
+    for record in reader:
+        # Exploramos el tipo de objeto 'record' y su campo 245
+        print("Tipo del objeto completo:")
+        print(type(record))
+        print()
+
+        print("Campo 245 crudo:")
+        print(record['245'])
+        print("Tipo del campo 245:")
+        print(type(record['245']))
+        print()
+
+        print("Campo 245 como texto (value):")
+        print(record['245'].value())
+        print("Tipo del texto:")
+        print(type(record['245'].value()))
+        print()
+
+        print("Subcampo 'a' del campo 245:")
+        print(record['245']['a'])
+        print("Tipo del subcampo 'a':")
+        print(type(record['245']['a']))
+        print()
+
+        print("Método record.title():")
+        print(record.title())
+        print("Tipo del resultado de record.title():")
+        print(type(record.title()))
+        print()
+
+        # Mostramos todos los campos 650 y 651 (materias)
+        print("Campos de materias (650 y 651):")
+        materias = record.get_fields('650', '651')
+        for campo in materias:
+            print(campo)
+        print()
+
+        # Subcampos 'a' y 'b' del campo 245
+        titulo = record['245']
+        if titulo:
+            print("Subcampos 'a' y 'b' del campo 245:")
+            subcampos = titulo.get_subfields('a', 'b')
+            for sub in subcampos:
+                print(sub)
+        # Detener después del primer registro (para ejemplo)
+        quit()
+
+ ```
+
+**¿Qué incluye este script?**
+
+- Análisis del campo 245 con distintos métodos (['a'], .value(), .title())
+
+- Acceso seguro a subcampos
+
+- Extracción de materias geográficas y temáticas (650, 651)
+
+- Uso de type() para mostrar los tipos de datos
+

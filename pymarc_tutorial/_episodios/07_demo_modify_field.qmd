@@ -1,0 +1,30 @@
+```{python}
+from pymarc import MARCReader, MARCWriter, Record, Field
+
+# Pymarc: Reading, Modifying, and Saving MARC Records
+
+# This script demonstrates how to iterate through a MARC file, modify a specific field, and save the updated records to a new file.
+
+input_file = "/Users/if224/Documents/Tutorials/pymarc_tutorial/original_69x_subject.mrc"
+output_file= "/Users/if224/Documents/Tutorials/pymarc_tutorial/edited_69x_subject.mrc"
+
+
+
+# Open the MARC file for reading and writing
+with open(input_file, "rb") as input_file, open(output_file, "wb") as output_file:
+    reader = MARCReader(input_file)
+    writer = MARCWriter(output_file)
+
+    for record in reader:
+        # Modify the title (Field 245, subfield 'a')
+        if record['245'] and 'a' in record['245']:
+            record['245']['a'] = "Updated Title"
+
+        # Save the modified record to a new file
+        writer.write(record)
+
+    writer.close()
+
+print("MARC file processed and saved as output.mrc")
+
+```

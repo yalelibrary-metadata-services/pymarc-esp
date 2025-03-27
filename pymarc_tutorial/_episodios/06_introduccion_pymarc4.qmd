@@ -1,0 +1,81 @@
+---
+title: Guardar archivos MARC
+objectives:
+- Cómo guardar registros MARC
+keypoints:
+- Podemos guardar un registro MARC en un formato adecuado
+- Podemos guardar varios registros MARC en un formato adecuado
+---
+
+- Download marc files
+- Enlace al google colab (python Basics, PyMarc Basics)
+
+## Guardar archivos MARC con PyMARC
+
+Solo nos queda una tarea por hacer: **guardar nuestros registros MARC** para poder reutilizarlos, compartirlos o cargarlos en otros sistemas.
+
+PyMARC incluye herramientas muy útiles que hacen este proceso **rápido y sencillo**.
+
+```{python}
+from pymarc import MARCReader
+
+my_marc_file = "SELECCIONAR ARCHIVO MARC"
+
+# Añadiremos registros a esta lista. Puede contener uno o más registros.
+my_marc_records = []
+
+with open(my_marc_file, 'rb') as data:
+    reader = MARCReader(data)
+    for record in reader:
+        # Añadimos cada registro a nuestra lista
+        my_marc_records.append(record)
+        # Imprimimos los IDs para visualizar qué estamos guardando
+        print(record['001'])
+
+# Creamos un nuevo archivo para guardar los registros
+my_new_marc_filename = "my_new_marc_file.mrc" 
+with open(my_new_marc_filename, 'wb') as data:
+    for my_record in my_marc_records:
+        # Escribimos cada registro en el archivo
+        data.write(my_record.as_marc())
+
+print()
+print("___")
+print()
+
+# Abrimos el archivo guardado para verificar que todo se haya escrito correctamente
+with open(my_new_marc_filename, 'rb') as data:
+    reader = MARCReader(data)
+    for record in reader:
+        print(record['001'])  # Mostramos los IDs para validar
+
+```
+
+
+## Versión simplificada
+
+La mayoría del código anterior es de apoyo para mostrar lo que ocurre.
+Si ya tienes una lista de registros llamada my_marc_records, guardar el archivo es muy sencillo:
+
+```{python}
+
+my_new_marc_filename = "my_new_marc_file.marc"
+with open(my_new_marc_filename, 'wb') as data:
+    for my_record in my_marc_records:
+        data.write(my_record.as_marc())
+```
+
+## Otras opciones de salida
+
+No estamos limitados al formato MARC binario. PyMARC también permite guardar los registros en otros formatos útiles:
+
+```python
+
+data.write(my_record.as_dict())     # Diccionario Python
+data.write(my_record.as_json())     # JSON
+data.write(my_record.as_marc())     # MARC binario
+data.write(my_record.as_marc21())   # Variante MARC21 legible por máquinas
+```
+
+Puedes combinar esto con otras bibliotecas como json o csv si deseas exportar los datos a formatos más compatibles con hojas de cálculo o APIs web.
+

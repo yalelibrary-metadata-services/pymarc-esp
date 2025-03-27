@@ -1,0 +1,89 @@
+---
+title: Introducción y Configuración
+objectives:
+- Abrir y ejecutar un cuaderno en Google Colab
+- Instalar y verificar bibliotecas de Python (por ejemplo, pymarc)
+- Ejecutar comandos básicos de Python para configurar el entorno
+- Subir y visualizar archivos de datos MARC
+keypoints:
+- Este taller esta inspirado en el recurso [Library Carpentry, PyMarc Basics](https://carpentries-incubator.github.io/pymarc_basics/aio/index.html).
+- Google Colab permite programar sin instalar nada y combina código y texto en un mismo lugar. 
+---
+
+## ¿Qué es Google Colab?
+
+Google Colab (abreviación de Google Colaboratory) es una plataforma gratuita creada por Google que permite escribir y ejecutar código en Python directamente desde tu navegador, sin necesidad de instalar nada en tu computadora. Es especialmente popular entre personas que trabajan con ciencia de datos, aprendizaje automático, análisis de datos y educación.
+
+**Características principales:**
+
+- Basado en Jupyter Notebooks: Usa el mismo formato que los notebooks de Jupyter (.ipynb), lo que permite combinar código, texto, imágenes y visualizaciones en un solo documento.
+
+- Ejecución en la nube: Todo corre en los servidores de Google, así que no necesitas una computadora potente.
+
+- Integración con Google Drive: Puedes guardar tus notebooks directamente en tu cuenta de Drive y compartirlos fácilmente.
+
+- Colaboración en tiempo real: Al estilo de Google Docs, puedes trabajar con otras personas en el mismo notebook. 
+
+
+## Accesando Google Colab
+
+1. Accede a la página de [Google Colab](https://colab.research.google.com/)
+
+![Acceder a Google Colab](pymarc_tutorial/_episodios/img/access_google_collab.png)
+   
+2. Crea un nuevo cuaderno pulsando el botón "New Notebook" (Nuevo cuaderno).
+   
+   1. Puedes cambiar el nombre del cuaderno, pulsando al lado del logo de Google Drive.
+
+![Nuevo Cuaderno de Google Colab](pymarc_tutorial/_episodios/img/new_colab_notebook.png)
+
+3. El primer bloque con el ícono de reproducir, usualmente es un bloque para escribir código. Puedes seguir añadiendo bloques de código o texto según tus necesidades. 
+
+![Bloque de código o texto](pymarc_tutorial/_episodios/img/block_code_text.png)
+
+## Conectar Google Colab a tu Google Drive
+
+Para conectar tu Google Colab a to Google Drive y poder acceder a tus archivos, has lo siguiente:
+
+   1. En el menu a la izquerda de la página, pulsa sobre el ícono de archivo. Te saldrá un menú con diferentes opciones. 
+   2. En el menú, ubica el archivo con el logo de Google Drive, y pulsa sobre el.
+      1. Al pulsar, te saldrá una notificación que pregunta si deseas permitir que el cuaderno acccese tus archivos en Google Drive. De autorizar:
+         1. Se abrirá una pantalla permitiendote elegir el correo electronico que deseas usar.
+         2. Esta configuración se realiza cada vez que creas un cuaderno nuevo y puede ser revocada en cualquier momento. 
+   
+![Autorizar la conexión entre Google Colab y Google Drive](pymarc_tutorial/_episodios/img/authorizing_drive_colab.png)
+
+
+## Preparando un ambiente de programación
+
+Preparar el ambiente de programación significa asegurarse de que tenemos todo lo necesario para trabajar: las herramientas, las bibliotecas y las versiones correctas.
+
+Es importante instalar las bibliotecas que sabemos que necesitaremos porque eso nos permite comenzar a trabajar sin errores por falta de funciones.
+
+A veces no sabemos todo lo que vamos a necesitar desde el inicio, y eso está bien: podemos ir agregando nuevas bibliotecas a medida que nuestro código se desarrolla o cambia.
+
+
+## ¿Qué es una librería de Python?
+
+Una biblioteca (o librería) en Python es un conjunto de funciones y herramientas ya escritas por otras personas, que puedes usar para hacer tareas específicas sin tener que escribir todo el código desde cero.
+
+Por ejemplo, si quieres trabajar con fechas, hay una biblioteca llamada `datetime`; si quieres leer archivos csv, hay una biblioteca llamada `csv`, si quieres leer archivos MARC, puedes usar la biblioteca `pymarc`; y si necesitas organizar, analizar o limpiar datos en forma de tabla, una opción muy común es la biblioteca `pandas`.
+
+## ¿Cómo instalo una libreria en Google Colab?
+
+En Google Colab, instalar una biblioteca es muy sencillo. Solo necesitas escribir una línea de código en una celda, empezando con el signo de exclamación (!) para usar comandos del sistema.
+
+```{python}
+
+!pip install pymarc
+
+```
+
+Este comando le dice a Colab que use pip (el instalador de paquetes de Python) para instalar la biblioteca pymarc.
+
+**Algunos puntos útiles:**
+
+- Solo necesitas hacerlo una vez por sesión.
+
+- Si la biblioteca ya está instalada, Colab te lo indicará.
+

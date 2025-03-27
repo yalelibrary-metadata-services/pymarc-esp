@@ -1,0 +1,249 @@
+---
+title: Introducción Básica a Python
+objectives:
+- Comprender los conceptos fundamentales de Python, incluyendo variables, tipos de datos y operadores básicos.
+- Utilizar estructuras de control como condicionales y bucles para controlar el flujo de un programa.
+- Familiarizarse con funciones integradas de Python (print, input, round, etc.) y cómo aplicarlas en ejemplos prácticos.
+- Aplicar buenas prácticas para escribir, documentar y probar código dentro de un entorno como Google Colab.
+keypoints:
+- Python es un lenguaje claro, legible y flexible, ampliamente utilizado en ciencia de datos, bibliotecas y humanidades digitales.
+- Las estructuras como condicionales, bucles y comprensiones de listas permiten escribir programas dinámicos, reutilizables y eficientes.
+---
+
+## ¿Qué es Python?
+
+Python fue inventado por Guido Van Rossum porque quería un lenguaje cuyo principal objetivo fuera proporcionar legibilidad del código y una mayor productividad para los desarrolladores. La idea se le ocurrió en 1980 y trabajó en el proyecto de manera ocasional durante sus vacaciones. No se convirtió en un lenguaje utilizable hasta 1991.
+
+Actualmente, Python es uno de los lenguajes de programación más utilizados y cuenta con un gran respaldo de la comunidad y abundante documentación.
+
+::: {.callout-tip title= "Detalles a tener en cuenta"}
+
+- Existen muchas maneras diferentes de realizar un mismo proceso.
+- Escribe los pasos que necesitas seguir para obtener un resultado (pseudocódigo).
+- Busca, busca y sigue buscando: Sitios web como StackOverflow pueden ayudarte con cualquier duda. Es posible que otras personas ya hayan hecho la misma pregunta en ese espacio.
+:::
+
+## Variables
+
+En Python, podemos asignar (darle un nombre a un valor asociándolo con una variable) un objeto o valor a una variable (un valor que tiene un nombre asociado), utilizando el signo de igualdad `=`.
+
+Por ejemplo, para asignar el valor `100` a una variable `weight_lb`, ejecutaríamos:
+
+```{python}
+weight_lb = 100
+```
+
+A partir de ahora, cada vez que usemos `weight_kg`, Python se referirá al **Objeto** al que apunta (en este caso, un número entero con el valor '100') y sustituirá efectivamente su valor donde se utilice la variable.
+
+## Reglas para las Variables en Python
+
+En Python, los nombres de las variables:
+
+- Solo pueden contener caracteres alfanuméricos y guiones bajos (`A-z`, `0-9`, y `_`).
+- Son sensibles a mayúsculas y minúsculas.
+- No pueden comenzar con un dígito.
+- No pueden incluir caracteres especiales.
+- No pueden ser palabras reservadas de Python (`and`, `as`, `if`, `else`, `elif`, `for`, entre muchas otras).
+
+Esto significa que, por ejemplo:
+
+- `weight0` es un nombre de variable válido, mientras que `0weight` no lo es.
+- `weight` y `Weight` son variables diferentes.
+- La variable `age` no es lo mismo que `AGE` o `Age`. `age`, `AGE` y `Age` serán tres variables distintas.
+
+## Usando variables en Python
+
+Para mostrar el valor de una variable en la pantalla en Python, podemos usar la función `print`.
+
+```{python}
+print(weight_lb)
+```
+
+::: {.callout-caution title= "Ejercicio" collapse="true"}
+
+Intenta crear algunas variables de los tres tipos básicos que hemos visto: **Entero (Integer), Punto Flotante (Floating Point) y Cadena de Texto (String).**
+
+Imprime cada una utilizando la función `print`.
+
+:::
+
+
+## **Cambiando el valor de una variable**
+
+Puedes cambiar el valor de una variable en cualquier momento reasignando su valor.
+
+```{python}
+# Reasignando el valor de la variable weight_lb
+weight_lb = 200
+```
+
+```{python}
+# Reasignando el valor de la variable weight_lb
+print(weight_lb)
+```
+
+
+::: {.callout-tip title = "Consejo"}
+
+Usa `#` para dejar notas sobre lo que hace un bloque de código.
+
+::: 
+
+
+## Funciones Integradas y Operadores Básicos
+
+### **Funciones Integradas (Built-in Functions)**
+
+* `print()` - imprime una declaración en pantalla.
+* `max()` - encuentra el valor más grande de uno o más valores.
+* `min()` - encuentra el valor más pequeño de uno o más valores.
+* `round()` - devuelve un número de punto flotante redondeado según el valor especificado.
+* `input()` - permite la entrada de datos por parte del usuario.
+  
+
+::: {.callout-caution title= "Ejercicio" collapse="true"}
+
+Escribe un programa que imprima tu nombre.
+
+El código a continuación está parcialmente escrito. Dentro de las flechas **<< >>**, escribe el valor correcto.  
+Una vez que tengas los valores correctos, recuerda eliminar las flechas, ya que dejarlas en el código podría causar errores.
+
+```{python}
+print("What is your name?")
+
+name = <<What would be the appropriate function to use here?>>
+
+print(f"Hello, {<What would be the appropiate variable to use here>}!")
+
+```
+
+:::
+
+### **Operadores**
+
+Los operadores son símbolos que realizan operaciones específicas en uno o más objetos. Un subconjunto de estos son los operadores aritméticos con los que probablemente ya estés familiarizado:
+
+* **Multiplicación:** `a * b`
+* **Suma:** `a + b`
+* **Resta:** `a - b`
+* **División:** `a / b`
+* **Asignación:** `a = b`
+* **Suma/Resta y asignación:** `a += b`, `a -= b`
+* **Exponente:** `a ** b` (ejemplo: `10**3 = 1000`)
+* **Módulo:** `%` (ejemplo: `9 % 4 = 1`)
+* **División Entera:** `a // b` (ejemplo: `9 // 4 = 2`)
+* **Indexación:** `[]`
+
+Puedes notar que la asignación (`=`), que ya hemos utilizado, es solo otro operador: intentará asignar el objeto o valor de la derecha a la variable de la izquierda.  
+
+Otro operador que usarás con frecuencia es el operador de **indexación (`[]`)**, que generalmente se utiliza para acceder a elementos dentro de colecciones, como obtener un solo carácter de una cadena de texto.
+
+::: {.callout-tip title = "Los índices en Python comienzan en 0"}
+
+Esto significa que el primer elemento tiene índice 0, el segundo tiene índice 1, y así sucesivamente.
+En este ejemplo, accedemos al primer y al tercer carácter de una cadena de texto.
+
+```{python}
+
+my_str = "TESTING"
+primero = my_str[0]   # Primer carácter: 'T'
+tercero = my_str[2]   # Tercer carácter: 'S'
+
+print(primero, tercero)
+```
+
+::: 
+
+## Estructuras de Control en Python
+
+Las estructuras de control en Python permiten dirigir el flujo de ejecución del programa, tomando decisiones o repitiendo acciones. Son esenciales para que el código pueda adaptarse a diferentes situaciones, condiciones o conjuntos de datos.
+
+### Condicionales (if, elif, else)
+Las declaraciones condicionales se usan para tomar decisiones. Permiten que el programa ejecute diferentes bloques de código dependiendo de si ciertas condiciones se cumplen o no.
+
+```{python}
+
+x = 10
+
+if x > 5:
+    print("x es mayor que 5")
+elif x == 5:
+    print("x es igual a 5")
+else:
+    print("x es menor que 5")
+```
+
+En este ejemplo:
+
+- Se evalúa si x es mayor que 5.
+
+- Si no lo es, se verifica si es igual a 5.
+
+- Si ninguna de las anteriores se cumple, se ejecuta el bloque else.
+
+### Bucles (for, while)
+
+Los bucles permiten repetir un bloque de código múltiples veces, ya sea recorriendo una secuencia (como una lista) o mientras se cumpla una condición.
+
+### Bucle for – Iterar sobre una secuencia
+El bucle for se utiliza para recorrer elementos de una secuencia (lista, tupla, cadena de texto, etc.).
+
+```{python}
+
+frutas = ["manzana", "banana", "cereza"]
+for fruta in frutas:
+    print(fruta)
+````
+
+Se imprime cada fruta de la lista una por una.
+
+
+### Bucle while – Repetir mientras una condición sea verdadera
+
+El bucle while ejecuta el bloque de código mientras la condición se mantenga verdadera.
+
+```{python}
+
+contador = 0
+while contador < 5:
+    print("Contador:", contador)
+    contador += 1
+```
+
+Este bucle imprime los números del 0 al 4. La variable contador se incrementa en cada vuelta hasta que deja de cumplir la condición.
+
+### Declaraciones de control de bucles (break, continue, pass)
+
+Estas instrucciones especiales permiten modificar el comportamiento del bucle:
+
+- **break:** Detiene completamente la ejecución del bucle.
+
+- **continue:** Salta la iteración actual y pasa a la siguiente.
+
+- **pass:** No hace nada; se usa como marcador de posición cuando se necesita un bloque pero no queremos ejecutar código aún.
+
+```{python}
+
+for numero in range(10):
+    if numero == 5:
+        break  # Sale del bucle cuando número es 5
+    if numero == 3:
+        continue  # Salta la iteración cuando número es 3
+    print(numero)
+```
+
+Resultado: Imprime los números del 0 al 4, pero salta el 3 y se detiene al llegar al 5.
+
+### Comprensión de listas (List Comprehensions)
+
+Una forma concisa y elegante de crear listas en una sola línea de código, aplicando condiciones o transformaciones.
+
+```{python}
+
+numeros = [x for x in range(10) if x % 2 == 0]
+print(numeros)  # [0, 2, 4, 6, 8]
+```
+
+Este ejemplo crea una lista con los números pares del 0 al 9.
+
+Estas estructuras de control son fundamentales para escribir programas que sean dinámicos, eficientes y fáciles de entender. Aprender a usarlas correctamente es un paso clave en el camino de dominar Python.

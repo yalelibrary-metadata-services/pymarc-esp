@@ -1,0 +1,31 @@
+```{python}
+from pymarc import MARCReader
+import csv
+from copy import deepcopy
+import re
+
+MRC_FILE = "/Users/if224/Documents/rds_git_repos/voyager-reports/lwl_856_delete_handles/lwl-2024-08-13.mrc"
+
+pattern = "http://hdl.handle.net/10079/digcoll/"
+with open(MRC_FILE, 'rb') as data: # Open unedit marc file
+    reader = MARCReader(data) # Read unedit marc file
+    with open("updated-lwl-2024-08.mrc","wb") as marc_output: # Open edit marc file
+        with open("deletion_report.csv", "w") as report_output: # Open csv file for report on changes
+            csv_writer = csv.writer(report_output,delimiter=",")
+            for record in reader: # Iterate thru all marc records
+                deepcopy_record = deepcopy(record) # Create a copy of the record
+                for field in deepcopy_record.get_fields('856'): # In the copy of the record, identify the field 856
+                    # print(field.get_subfields("u"))
+                    subfield_us = field.get_subfields('u') # Get the subfield u from field 856
+                    for subfield_u in subfield_us: # For each subfield u
+                        # print(re.match(pattern,str(subfield_u)))
+                        if re.match(pattern,str(subfield_u)): # identify if they have the pattern in the string
+                            report_row = tuple([deepcopy_record.get_fields('001')[0],str(field)]) # if so, save record id and 856 field
+                            csv_writer.writerow(report_row) # write tuple containing record id and copy of unedit 856 field on the report
+                            deepcopy_record.remove_field(field) # delete field
+                            print(deepcopy_record.get_fields('001')[0]) # Print to screen record id
+                            print(field) # Print to screen unedit field 856
+                marc_output.write(deepcopy_record.as_marc()) # write marc field
+
+
+```

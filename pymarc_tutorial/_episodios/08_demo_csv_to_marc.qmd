@@ -1,0 +1,212 @@
+```{python}
+import csv
+from pymarc import Record, Field, MARCWriter, MARCReader, Subfield
+
+# Input and Output files
+input_csv_file = "/Users/if224/Documents/rds_git_repos/film_arch/YFA LSF 2025_03.csv"  # Replace with your actual CSV file path
+output_marc_file = "output_marc.mrc"
+
+# Dictionary to store grouped records
+records_dict = {}
+
+# Open CSV and read data
+with open(input_csv_file, mode="r", encoding="utf-8-sig", newline="") as infile:
+    reader = csv.DictReader(infile)
+    
+    for row in reader:
+    # Clean up all values by stripping spaces
+        cleaned_row = {}  # Create an empty dictionary
+
+        for key, value in row.items():  # Iterate over each key-value pair in the row
+            if isinstance(value, str):  # Check if the value is a string
+                cleaned_row[key] = value.strip()  # Strip leading and trailing spaces
+            else:
+                cleaned_row[key] = value  # Keep the value unchanged if it's not a string
+
+        # Modify ReelCount_300$a to add a space before semicolon if needed
+        if "ReelCount_300$a" in cleaned_row:
+            cleaned_row["ReelCount_300$a"] = cleaned_row["ReelCount_300$a"].replace(";", " ;")
+        
+        # Use Call Number as the group key
+        group_key = cleaned_row["Call#_099$a"]
+
+        if group_key not in records_dict:
+            records_dict[group_key] = {
+                "record_data": cleaned_row,  # Store bibliographic details
+                "852_fields": []  # List to collect multiple 852 fields
+            }
+
+        # Append 852 field for each reel
+        records_dict[group_key]["852_fields"].append(
+            Field(
+                tag='852',
+                indicators=['8', '1'],
+                subfields=[
+                    Subfield(code='b', value='lsffsfilm'),  # Archival location code
+                    Subfield(code='h', value=cleaned_row.get("Call#_099$a", "")),  # Call number
+                    Subfield(code='p', value=cleaned_row.get("Reel Number", "")),  # Reel number
+                    Subfield(code='x', value=cleaned_row.get("Barcode", ""))  # Barcode
+                ]
+            )
+        )
+
+# Generate MARC records
+with open(output_marc_file, "wb") as marc_out:
+    writer = MARCWriter(marc_out)
+
+    for group_key, data in records_dict.items():
+        row = data["record_data"]
+        record = Record()
+
+        # Modify Leader fields
+        leader_list = list(record.leader)
+        leader_list[6] = "g"  # Projected medium
+        leader_list[17] = "5"  # Encoding level
+        leader_list[22] = "0"  # MARC standard coding
+        record.leader = "".join(leader_list)
+
+        # Control field 008
+        field_008_data = list(" " * 40)
+        field_008_data[18] = "|"
+        field_008_data[33] = "m"
+        field_008_data[34] = "|"
+        record.add_field(Field(tag='008', data="".join(field_008_data)))
+
+        # Bibliographic fields
+
+        record.add_field(Field(tag='099', indicators=[' ', ' '], subfields=[
+            Subfield(code='a', value=row.get("Call#_099$a", ""))
+        ]))
+       
+        # FIELD 245: Determine the title and nonfiling characters
+        title = row.get("Title_245$a", "").strip()
+        title_medium = row.get("Title_245$h", "").strip()
+
+        # FIELD 245: Determine first indicator (assumed added entry is always made)
+        first_indicator = '0'  # Change to '0' if no added entry is needed
+
+        # FIELD 245: Determine second indicator (nonfiling characters)
+        nonfiling_chars = 0
+        articles = {
+            "A ": 2,
+            "An ": 3,
+            "The ": 4,
+            "El ": 3,
+            "La ": 3,
+            "Le ": 3,
+            "Der ": 4,
+            "Die ": 4,
+            "Das ": 4
+        }
+
+        for article, count in articles.items():
+            if title.startswith(article):
+                nonfiling_chars = count
+                break
+
+        second_indicator = str(nonfiling_chars)
+
+        # Ensure Title_245$h ends with a period
+        if title_medium and not title_medium.endswith('.'):
+            title_medium += '.'
+        record.add_field(Field(tag='245', indicators=[first_indicator, second_indicator], subfields=[
+            Subfield(code='a', value=title),
+            Subfield(code='h', value=title_medium) if title_medium else None
+        ]))
+
+        record.add_field(Field(tag='260', indicators=[' ', ' '], subfields=[
+            Subfield(code='c', value=(lambda v: v if v.endswith('.') else v + '.')(row.get("Date_260$c", "")))
+        ]))
+        
+        record.add_field(Field(tag='300', indicators=[' ', ' '], subfields=[
+            Subfield(code='a', value=row.get("ReelCount_300$a", "")),
+            Subfield(code='c', value=(lambda v: v if v.endswith('.') else v + '.')(row.get("Gauge_300$c", "")))
+        ]))
+
+        record.add_field(Field(tag='500', indicators=[' ', ' '], subfields=[
+            Subfield(code='a', value=(lambda v: v if v.endswith('.') else v + '.')(row.get("FilmNotes_500$a", "")))
+        ]))
+
+        record.add_field(Field(tag='506', indicators=[' ', ' '], subfields=[
+            Subfield(code='a', value=(lambda v: v if v.endswith('.') else v + '.')(row.get("FilmNotes_506$a", "")))
+        ]))
+
+        record.add_field(Field(tag='590', indicators=[' ', ' '], subfields=[
+            Subfield(code='a', value=(lambda v: v if v.endswith('.') else v + '.')(row.get("Condition_590$a", "")))
+        ]))
+
+        # Construct full director name
+        director_last = row.get("DirectorLast_700$a", "").strip()
+        director_first = row.get("DirectorFirst_700$a", "").strip()
+        director_middle = row.get("DirectorMiddle_700$a", "").strip()
+        director_family = row.get("DirectorFamily_700$a","").strip()
+        
+        # Determine first indicator based on name type
+        # There can be an overlap depending on the case 
+        # LOC Website has no examples of Family Name usage, https://www.loc.gov/marc/bibliographic/bd700.html
+
+        if director_last:
+            first_indicator = '1'  # Surname = Last Name (Format: Apellido, Nombre)
+
+        elif director_family:
+            first_indicator = '3'  # Family Name = (Format: Apellido Nombre) 
+       
+        elif director_first:
+            first_indicator = '0'  # Forename = First Name (Format: Nombre Apellido)
+        
+        else:
+            first_indicator = ' '  # Default (should not happen)
+            # raise ValueError("Missing values from field 700 to determine first indicator")
+
+        # Second indicator (defaulting to #)
+
+        second_indicator = ' '  
+        
+
+        # Skip Field 700 if no values found for field.
+        if first_indicator != ' ':
+            # Identify if there is a Jr. in middle name, move it to subfield c
+            # This check could become a function that identifies if subfield c needs to be added.
+            if "Jr" in director_middle or "Jr." in director_middle:
+                
+                if first_indicator == '1':
+                    first_last_name= ", ".join(filter(None, [director_last, " ".join(filter(None, [director_first]))]))
+                elif first_indicator == '3':
+                    first_last_name= " ".join(filter(None, [director_family, " ".join(filter(None, [director_first]))]))
+                elif first_indicator == '0':
+                    first_last_name = " ".join(filter(None, [director_first, " ".join(filter(None, [director_last]))]))
+                
+                full_director_name_field = Field(tag='700', indicators=[first_indicator, second_indicator], subfields=[
+                    Subfield(code='a', value=first_last_name),
+                    Subfield(code='c', value=(lambda v: v if v.endswith('.') else v)(row.get('DirectorMiddle_700$a', ""))),
+                    ])
+        
+            else:
+                if first_indicator == '1':
+                    full_director_name_string = ", ".join(filter(None, [director_last, " ".join(filter(None, [director_first, director_middle]))]))
+                if first_indicator == '3':
+                    full_director_name_string = " ".join(filter(None, [director_family, " ".join(filter(None, [director_first, director_middle]))]))
+                if first_indicator == '0':
+                    full_director_name_string = " ".join(filter(None, [director_first, director_middle]))
+                
+                full_director_name_field = Field(
+                    tag='700', indicators=[first_indicator, second_indicator], 
+                    subfields=[
+                        Subfield(code='a', value=f"{full_director_name_string}.")
+                    ])
+
+            if full_director_name_field:
+                record.add_field(full_director_name_field)
+        
+        # Add all 852 fields collected for this record
+        for field_852 in data["852_fields"]:
+            record.add_field(field_852)
+
+        # Write the bibliographic MARC record
+        writer.write(record)
+
+    writer.close()
+
+print(f"MARC records saved to {output_marc_file}")
+
+```
