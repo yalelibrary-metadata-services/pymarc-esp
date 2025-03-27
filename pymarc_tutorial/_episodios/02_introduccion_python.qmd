@@ -61,6 +61,29 @@ Para mostrar el valor de una variable en la pantalla en Python, podemos usar la 
 print(weight_lb)
 ```
 
+
+## **Tipos de Datos**
+
+Python reconoce varios tipos de datos.
+
+Los cuatro más básicos (sin incluir los tipos de colección) son:
+
+- **Números enteros (`integer`)** - números sin decimales, como `1234`.
+
+- **Números de punto flotante (`float`)** - números decimales, como `1.34545`.
+
+- **Cadenas de texto (`strings`)** - secuencias de caracteres, como `"¡Hola mundo!"`.
+
+- **Booleanos (`booleans`)** - un tipo binario que solo puede tener los valores `True` o `False`.
+
+ También hay estructuras de colección:
+
+- **Listas (list)** – estructuras utilizadas para almacenar múltiples elementos en una sola variable, como mylist = ["manzana", "banana", "cereza"].
+
+- **Diccionarios (dictionary**) – estructuras que almacenan pares de clave y valor. Son útiles para buscar datos asociados a una clave específica. Ejemplo:
+`persona = {"nombre": "Ana","edad": 30,"ciudad": "Madrid"}`
+
+
 ::: {.callout-caution title="Ejercicio" collapse="true" }
 
 Intenta crear algunas variables de los tres tipos básicos que hemos visto: **Entero (Integer), Punto Flotante (Floating Point) y Cadena de Texto (String).**
@@ -239,6 +262,31 @@ for numero in range(10):
 ```
 
 Resultado: Imprime los números del 0 al 4, pero salta el 3 y se detiene al llegar al 5.
+
+### Estructura de Control de Excepciones (try, except, else)
+
+try: Intenta ejecutar un bloque de código que podría generar un error.
+
+except: Se ejecuta si ocurre un error dentro del bloque try.
+
+else: Se ejecuta solo si no ocurre ningún error en el bloque try.
+
+Ejemplo con try, except, else:
+
+```{python}
+
+valores = ["10", "abc", "25", "3.14", "-7"]
+
+for valor in valores:
+    try:
+        numero = int(valor)
+    except ValueError:
+        print(f"No se pudo convertir '{valor}' a número entero.")
+    else:
+        print(f"Conversión exitosa: {numero}")
+
+```
+
 
 ### Comprensión de listas (List Comprehensions)
 
