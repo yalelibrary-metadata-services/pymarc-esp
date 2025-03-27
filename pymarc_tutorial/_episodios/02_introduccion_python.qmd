@@ -35,7 +35,7 @@ Por ejemplo, para asignar el valor `100` a una variable `weight_lb`, ejecutaría
 weight_lb = 100
 ```
 
-A partir de ahora, cada vez que usemos `weight_kg`, Python se referirá al **Objeto** al que apunta (en este caso, un número entero con el valor '100') y sustituirá efectivamente su valor donde se utilice la variable.
+A partir de ahora, cada vez que usemos `weight_lb`, Python se referirá al **Objeto** al que apunta (en este caso, un número entero con el valor `100`) y sustituirá efectivamente su valor donde se utilice la variable.
 
 ## Reglas para las Variables en Python
 
@@ -53,14 +53,13 @@ Esto significa que, por ejemplo:
 - `weight` y `Weight` son variables diferentes.
 - La variable `age` no es lo mismo que `AGE` o `Age`. `age`, `AGE` y `Age` serán tres variables distintas.
 
-## Usando variables en Python
+## Usando Variables en Python
 
 Para mostrar el valor de una variable en la pantalla en Python, podemos usar la función `print`.
 
 ```{python}
 print(weight_lb)
 ```
-
 
 ## **Tipos de Datos**
 
@@ -78,10 +77,10 @@ Los cuatro más básicos (sin incluir los tipos de colección) son:
 
  También hay estructuras de colección:
 
-- **Listas (list)** – estructuras utilizadas para almacenar múltiples elementos en una sola variable, como mylist = ["manzana", "banana", "cereza"].
+- **Listas (list)** – estructuras utilizadas para almacenar múltiples elementos en una sola variable, como `mylist = ["manzana", "banana", "cereza"]`.
 
-- **Diccionarios (dictionary**) – estructuras que almacenan pares de clave y valor. Son útiles para buscar datos asociados a una clave específica. Ejemplo:
-`persona = {"nombre": "Ana","edad": 30,"ciudad": "Madrid"}`
+- **Diccionarios (dictionary)** – estructuras que almacenan pares de clave y valor. Son útiles para buscar datos asociados a una clave específica. Ejemplo:
+`persona = {"nombre": "Ana", "edad": 30, "ciudad": "Madrid"}`
 
 
 ::: {.callout-caution title="Ejercicio" collapse="true" }
@@ -93,7 +92,7 @@ Imprime cada una utilizando la función `print`.
 :::
 
 
-## **Cambiando el valor de una variable**
+## **Cambiando el Valor de una Variable**
 
 Puedes cambiar el valor de una variable en cualquier momento reasignando su valor.
 
@@ -117,7 +116,7 @@ Usa `#` para dejar notas sobre lo que hace un bloque de código.
 
 ## Funciones Integradas y Operadores Básicos
 
-### **Funciones Integradas (Built-in Functions)**
+### **Funciones Integradas (Built-In Functions)**
 
 * `print()` - imprime una declaración en pantalla.
 * `max()` - encuentra el valor más grande de uno o más valores.
@@ -203,11 +202,11 @@ else:
 
 En este ejemplo:
 
-- Se evalúa si x es mayor que 5.
+- Se evalúa si `x` es mayor que 5.
 
 - Si no lo es, se verifica si es igual a 5.
 
-- Si ninguna de las anteriores se cumple, se ejecuta el bloque else.
+- Si ninguna de las anteriores se cumple, se ejecuta el bloque `else`.
 
 ### Bucles (for, while)
 
@@ -225,7 +224,6 @@ for fruta in frutas:
 
 Se imprime cada fruta de la lista una por una.
 
-
 ### Bucle while – Repetir mientras una condición sea verdadera
 
 El bucle while ejecuta el bloque de código mientras la condición se mantenga verdadera.
@@ -234,7 +232,7 @@ El bucle while ejecuta el bloque de código mientras la condición se mantenga v
 
 contador = 0
 while contador < 5:
-    print("Contador:", contador)
+    print("Contador: ", contador)
     contador += 1
 
 ```
