@@ -1,4 +1,5 @@
 ---
+page-navigation: true
 title: Introducción y Configuración
 objectives:
 - Abrir y ejecutar un cuaderno en Google Colab
@@ -22,6 +23,7 @@ En este taller, se enseñará cómo utilizar Python y PyMARC para gestionar regi
 - Herramienta: Google Collab
  
 **Agenda Tentativa (1hr 45 minutos):**
+
 - Introducción a librerías: PyMARC (30 minutos)
 - Demostración de codigo en vivo (35 minutos)
 - Taller de lectura, modificación y guradado ( 25 minutos)

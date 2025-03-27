@@ -1,4 +1,5 @@
 ---
+page-navigation: true
 title: Editar con PyMARC
 objectives:
 - Cambiar información dentro de un registro MARC

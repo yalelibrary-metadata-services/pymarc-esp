@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Búsqueda con PyMARC</title>
+<title>PyMARC en Español - Búsqueda con PyMARC</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -64,6 +64,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
+<link href="./05_introduccion_pymarc3.html" rel="next">
+<link href="./03_introduccion_pymarc.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -111,16 +113,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <header id="quarto-header" class="headroom fixed-top">
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">PyMARC en Español</span>
+    </a>
+  </div>
             <div id="quarto-search" class="" title="Search"></div>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
   <span class="navbar-toggler-icon"></span>
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
-  <li class="nav-item">
-    <a class="nav-link" href="./index.html"> 
-<span class="menu-text">PyMARC en Español</span></a>
-  </li>  
   <li class="nav-item dropdown ">
     <a class="nav-link dropdown-toggle" href="#" id="nav-menu-taller-introductorio-pymarc" role="button" data-bs-toggle="dropdown" aria-expanded="false">
  <span class="menu-text">Taller Introductorio PyMARC</span>
@@ -213,7 +216,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="busqueda-general">Busqueda General</h2>
 <p><strong>¿Qué pasa si queremos encontrar cualquier registro que contenga un termino en particular?</strong></p>
 <p>Sugerencias: * California * San Francisco * lesbian</p>
-<div id="32b4e7f2" class="cell" data-execution_count="1">
+<div id="7eee21f8" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Importamos la biblioteca pymarc, que nos ayuda a leer archivos MARC</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pymarc</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -235,7 +238,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>            <span class="co"># Detener después del primer registro con "New Zealand"</span></span>
 <span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>            <span class="cf">break</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>=LDR  08217cpcaa22009377a 4500
+<pre><code>=LDR  08224cpcaa22009377a 4500
 =001  13109011
 =005  20221206230121.0
 =006  knnn\\\\\\\\\\\\kn
@@ -248,7 +251,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 =040  \\$aCtY-BR$beng$cCtY-BR$edacs
 =043  \\$an-us---$an-us-ca
 =100  1\$aO'Leary, Jean.
-=245  10$aUpdated Title$f1963-2005.
+=245  10$aJean O'Leary papers,$f1963-2005.
 =300  \\$a18.35$flinear feet (20 boxes)
 =351  \\$aOrganized into five series: I. Professional Papers, 1973-2005. II. Correspondence, 1976-2004. III. Personal Papers, 1963-2005. IV. Photographs, circa 1970-2005. V. Computer and Audiovisual Media, circa 1990-1994.
 =506  0\$aThis material is open for research.
@@ -321,7 +324,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>La busqueda anterior imprime todos los campos the un registro.Esto podría devolver una gran cantidad de datos de poco interes para nosotors. Pensemos en cómo podríamos formular mejor esta pregunta para refinar los resultados.</p>
 <p>Si en lugar de imprimir todo el registro, queremos ver sólo los campos MARC que contienen el patrón de interes, podemos añadir otro bucle.</p>
 <p>Además, podríamos querer mostrar el identificador del registro junto con el campo coincidente:</p>
-<div id="dad05f2a" class="cell" data-execution_count="2">
+<div id="db396dc7" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Importamos la biblioteca pymarc, que nos ayuda a leer archivos MARC</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pymarc</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -385,7 +388,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>PyMARC ofrece varios <strong>métodos abreviados</strong> para acceder a campos y subcampos de forma elegante.</p>
 <section id="get_fields-get_subfields" class="level3">
 <h3 class="anchored" data-anchor-id="get_fields-get_subfields"><code>get_fields()</code>, <code>get_subfields()</code></h3>
-<div id="4f89ce8c" class="cell" data-execution_count="3">
+<div id="2a26e7c5" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pymarc</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>my_marc_file <span class="op">=</span> <span class="st">"data/edited_69x_subject.mrc"</span></span>
@@ -404,38 +407,38 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>                <span class="co"># Detener después del primer campo 245 del registro</span></span>
 <span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>                <span class="cf">break</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>08217cpcaa22009377a 4500
-   Updated Title
+<pre><code>08224cpcaa22009377a 4500
+   Jean O'Leary papers,
    1963-2005.
-09795cpcaa2201129 i 4500
-   Updated Title
+09802cpcaa2201129 i 4500
+   Eileen Myles papers,
    1958-2017.
-07222cpcaa2200733 i 4500
-   Updated Title
+07228cpcaa2200733 i 4500
+   Paul Mariah papers,
    1898-2014
    (bulk 1960-1988).
-03245cpcaa2200361 i 4500
-   Updated Title
+03252cpcaa2200361 i 4500
+   Dorothy Gray papers,
    1890-1994
-01842cam a2200337Mi 4500
-   Updated Title
+01861cam a2200337Mi 4500
+   "George Washington slept here" /
    by George S. Kaufman &amp; Moss Hart ; directed by Donald McLean ; produced by Perry George &amp; Rod Schaefer.
-01020cam a2200277Mi 4500
-   Updated Title
+01069cam a2200277Mi 4500
+   Theatre Rhinoceros presents the 1984-85 season of High drama :
    our 8th season.
-01968cam a2200457 a 4500
-   Updated Title
+01967cam a2200457 a 4500
+   Mama's boy /
    Bev Arthur and Martin Arthur.
-02028cam a2200421 a 4500
-   Updated Title
+02024cam a2200421 a 4500
+   Witness :
    the artist's vision in The face of AIDS /
    Jackie Kirk, Barbara Swift Brauer.
-03030cam a2200529 i 4500
-   Updated Title
+03049cam a2200529 i 4500
+   The men with the pink triangle :
    the true, life-and-death story of homosexuals in the Nazi death camps /
    by Heinz Heger ; translated by David Fernbach.
-02210cam a2200337 i 4500
-   Updated Title
+02208cam a2200337 i 4500
+   Snap/shot :
    99 years of looking fabulous.</code></pre>
 </div>
 </div>
@@ -444,7 +447,7 @@ https://www.loc.gov/marc/bibliographic/concise/bd245.html</p>
 </section>
 <section id="acceder-a-indicadores-de-un-campo-.indicator1-.indicator2" class="level3">
 <h3 class="anchored" data-anchor-id="acceder-a-indicadores-de-un-campo-.indicator1-.indicator2">Acceder a indicadores de un campo, .indicator1 , .indicator2</h3>
-<div id="768524f0" class="cell" data-execution_count="4">
+<div id="6e1d1178" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pymarc</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>my_marc_file <span class="op">=</span> <span class="st">"data/edited_69x_subject.mrc"</span></span>
@@ -464,19 +467,19 @@ https://www.loc.gov/marc/bibliographic/concise/bd245.html</p>
 <span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> count <span class="op">&gt;=</span> <span class="bu">max</span>:</span>
 <span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>            <span class="cf">break</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>=245  10$aUpdated Title$f1977-2014 (inclusive).
+<pre><code>=245  10$aFamily Equality Council records,$f1977-2014 (inclusive).
 Indicador 1 del campo 245: 1
 Indicador 2 del campo 245: 0
-=245  10$aUpdated Title$f1983-2011 (inclusive).
+=245  10$aRainbow Families records,$f1983-2011 (inclusive).
 Indicador 1 del campo 245: 1
 Indicador 2 del campo 245: 0
-=245  10$aUpdated Title$f1963-2005.
+=245  10$aJean O'Leary papers,$f1963-2005.
 Indicador 1 del campo 245: 1
 Indicador 2 del campo 245: 0
-=245  10$aUpdated Title$f1948-2016 (inclusive).
+=245  10$aFreedom to Marry records,$f1948-2016 (inclusive).
 Indicador 1 del campo 245: 1
 Indicador 2 del campo 245: 0
-=245  10$aUpdated Title$f1995-2003 (inclusive).
+=245  10$aMichael Antisdale and Mark R. Melanson Papers,$f1995-2003 (inclusive).
 Indicador 1 del campo 245: 1
 Indicador 2 del campo 245: 0</code></pre>
 </div>
@@ -519,7 +522,7 @@ Indicador 2 del campo 245: 0</code></pre>
 </section>
 <section id="construyendo-un-parser-básico" class="level2">
 <h2 class="anchored" data-anchor-id="construyendo-un-parser-básico">Construyendo un parser básico</h2>
-<div id="2ea8fe38" class="cell" data-execution_count="5">
+<div id="c5ee9a48" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pymarc <span class="im">import</span> MARCReader</span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>archivo <span class="op">=</span> <span class="st">"data/edited_69x_subject.mrc"</span></span>
@@ -578,7 +581,7 @@ Indicador 2 del campo 245: 0</code></pre>
         Subcampo $a: Family Equality Council.
         Subcampo $0: http://id.loc.gov/authorities/names/no2012037822
     Tag #: 245  Indicador 1: 1  Indicador 2: 0
-        Subcampo $a: Updated Title
+        Subcampo $a: Family Equality Council records,
         Subcampo $f: 1977-2014 (inclusive).
     Tag #: 300  Indicador 1:    Indicador 2:  
         Subcampo $a: 11 linear feet. (23 boxes)
@@ -734,7 +737,7 @@ Indicador 2 del campo 245: 0</code></pre>
 
 </section>
 
-</main> <!-- /main -->
+<a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
@@ -1144,7 +1147,32 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
 });
 </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./03_introduccion_pymarc.html" class="pagination-link" aria-label="Introducción a PyMarc">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Introducción a PyMarc</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./05_introduccion_pymarc3.html" class="pagination-link" aria-label="Editar con PyMARC">
+        <span class="nav-page-text">Editar con PyMARC</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
 </div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">
+<p>Contenido derivado del curso PyMARC Basics del Library Carpentry</p>
+</div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
 
 
 

@@ -1,4 +1,5 @@
 ---
+page-navigation: true
 title: Introducción a PyMarc
 objectives:
 - ¿Qué es MARC?
@@ -191,7 +192,7 @@ with open(my_marc_file, 'rb') as data:
         # Imprimimos el contenido completo del registro en formato legible
         print(record)
         # Detener después del primer registro (para ejemplo)
-        quit()
+        break
 
 ```
 
@@ -368,6 +369,7 @@ Podemos usar el mismo método de "clave" (`key`) para acceder a los **subcampos*
 
 ```{python}
 #| error: true
+
 from pymarc import MARCReader
 
 # Definimos el nombre del archivo MARC que queremos leer
@@ -390,7 +392,12 @@ with open(my_marc_file, 'rb') as data:
         print(error)
         # raise error
         pass
+
+
 ```
+
+
+
 
 **¿Qué está ocurriendo aquí?**
 
@@ -455,9 +462,11 @@ PyMARC incluye métodos “accesibles” como `.title()`, que devuelve el conten
 | `record['001'].value()`       | `record`               | Devuelve el número de control del registro (campo 001) como texto         | `str`                            | `record['001'].value()`                 |
 | `type(objeto)`                | Cualquier objeto       | Muestra el tipo de dato del objeto                                        | `type`                           | `type(record['245'])`                   |
 
+
 Puedes combinar varios métodos, por ejemplo:
 
- ```{python}
+
+```{python}
 
 from  pymarc import MARCReader
 
@@ -465,7 +474,7 @@ from  pymarc import MARCReader
 my_marc_file = "data/edited_69x_subject.mrc"
 
 # Abrimos el archivo en modo lectura binaria ('rb')
-with  open(my_marc_file, 'rb') as data:
+with open(my_marc_file, 'rb') as data:
     reader = MARCReader(data)
 
     # Iteramos sobre cada registro
@@ -516,7 +525,7 @@ with  open(my_marc_file, 'rb') as data:
         # Detener después del primer registro (para ejemplo)
         break
 
- ```
+```
 
 **¿Qué incluye este script?**
 

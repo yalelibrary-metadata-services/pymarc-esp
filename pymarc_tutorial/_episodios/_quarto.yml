@@ -5,12 +5,15 @@ project:
     - "*.qmd"
 
 website:
+  page-navigation: true
+  back-to-top-navigation: true
+  title: "PyMARC en Español"
+  page-footer: "Contenido derivado del curso PyMARC Basics del Library Carpentry" 
   navbar:
     # style: docked
     # background: primary
     search: false
     left:
-      - index.qmd
       - text: Taller Introductorio PyMARC
         menu:
           - 01_introduccion.qmd
@@ -19,9 +22,24 @@ website:
           - 04_introduccion_pymarc2.qmd
           - 05_introduccion_pymarc3.qmd
           - 06_introduccion_pymarc4.qmd
+  sidebar:
+    - id: taller-00
+      search: false
+      title: "Taller Introductorio PyMARC"
+      style: "docked"
+      background: light
+      contents:
+        - 01_introduccion.qmd
+        - 02_introduccion_python.qmd
+        - 03_introduccion_pymarc.qmd
+        - 04_introduccion_pymarc2.qmd
+        - 05_introduccion_pymarc3.qmd
+        - 06_introduccion_pymarc4.qmd
+
+sidebar: false
 
 format:
   html:
-    theme: cosmo 
+    theme: yeti
     toc: true
     css: css/output.css
