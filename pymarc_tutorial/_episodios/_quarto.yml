@@ -1,5 +1,5 @@
 project:
-  output-dir: ../../public/_episodes
+  output-dir: ../../docs
   type: website
   render:
     - "*.qmd"
