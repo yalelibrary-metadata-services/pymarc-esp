@@ -62,10 +62,9 @@ with open(my_new_marc_filename, 'rb') as data:
 ## Versión simplificada
 
 La mayoría del código anterior es de apoyo para mostrar lo que ocurre.
-Si ya tienes una lista de registros llamada my_marc_records, guardar el archivo es muy sencillo:
+Si ya tienes una lista de registros llamada `my_marc_records`, guardar el archivo es muy sencillo:
 
 ```python
-
 my_new_marc_filename = "my_new_marc_file.marc"
 with open(my_new_marc_filename, 'wb') as data:
     for my_record in my_marc_records:
@@ -77,12 +76,11 @@ with open(my_new_marc_filename, 'wb') as data:
 No estamos limitados al formato MARC binario. PyMARC también permite guardar los registros en otros formatos útiles:
 
 ```python
-
 data.write(my_record.as_dict())     # Diccionario Python
 data.write(my_record.as_json())     # JSON
 data.write(my_record.as_marc())     # MARC binario
 data.write(my_record.as_marc21())   # Variante MARC21 legible por máquinas
 ```
 
-Puedes combinar esto con otras bibliotecas como json o csv si deseas exportar los datos a formatos más compatibles con hojas de cálculo o APIs web.
+Puedes combinar esto con otras bibliotecas como JSON o CSV si deseas exportar los datos a formatos más compatibles con hojas de cálculo o APIs web.
 
