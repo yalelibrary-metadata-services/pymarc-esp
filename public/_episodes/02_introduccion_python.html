@@ -1,0 +1,916 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.4.551">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Python 101</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="css/output.css">
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="./index.html"> 
+<span class="menu-text">PyMARC en Español</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-taller-introductorio-pymarc" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Taller Introductorio PyMARC</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-taller-introductorio-pymarc">    
+        <li>
+    <a class="dropdown-item" href="./01_introduccion.html">
+ <span class="dropdown-text">Introducción y Configuración</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./02_introduccion_python.html">
+ <span class="dropdown-text">Python 101</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./03_introduccion_pymarc.html">
+ <span class="dropdown-text">Introducción a PyMarc</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./04_introduccion_pymarc2.html">
+ <span class="dropdown-text">Búsqueda con PyMARC</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./05_introduccion_pymarc3.html">
+ <span class="dropdown-text">Editar con PyMARC</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./06_introduccion_pymarc4.html">
+ <span class="dropdown-text">Guardar archivos MARC</span></a>
+  </li>  
+    </ul>
+  </li>
+</ul>
+          </div> <!-- /navcollapse -->
+          <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#qué-es-python" id="toc-qué-es-python" class="nav-link active" data-scroll-target="#qué-es-python">¿Qué es Python?</a></li>
+  <li><a href="#variables" id="toc-variables" class="nav-link" data-scroll-target="#variables">Variables</a></li>
+  <li><a href="#reglas-para-las-variables-en-python" id="toc-reglas-para-las-variables-en-python" class="nav-link" data-scroll-target="#reglas-para-las-variables-en-python">Reglas para las Variables en Python</a></li>
+  <li><a href="#usando-variables-en-python" id="toc-usando-variables-en-python" class="nav-link" data-scroll-target="#usando-variables-en-python">Usando variables en Python</a></li>
+  <li><a href="#cambiando-el-valor-de-una-variable" id="toc-cambiando-el-valor-de-una-variable" class="nav-link" data-scroll-target="#cambiando-el-valor-de-una-variable"><strong>Cambiando el valor de una variable</strong></a></li>
+  <li><a href="#funciones-integradas-y-operadores-básicos" id="toc-funciones-integradas-y-operadores-básicos" class="nav-link" data-scroll-target="#funciones-integradas-y-operadores-básicos">Funciones Integradas y Operadores Básicos</a>
+  <ul class="collapse">
+  <li><a href="#funciones-integradas-built-in-functions" id="toc-funciones-integradas-built-in-functions" class="nav-link" data-scroll-target="#funciones-integradas-built-in-functions"><strong>Funciones Integradas (Built-in Functions)</strong></a></li>
+  <li><a href="#operadores" id="toc-operadores" class="nav-link" data-scroll-target="#operadores"><strong>Operadores</strong></a></li>
+  </ul></li>
+  <li><a href="#estructuras-de-control-en-python" id="toc-estructuras-de-control-en-python" class="nav-link" data-scroll-target="#estructuras-de-control-en-python">Estructuras de Control en Python</a>
+  <ul class="collapse">
+  <li><a href="#condicionales-if-elif-else" id="toc-condicionales-if-elif-else" class="nav-link" data-scroll-target="#condicionales-if-elif-else">Condicionales (if, elif, else)</a></li>
+  <li><a href="#bucles-for-while" id="toc-bucles-for-while" class="nav-link" data-scroll-target="#bucles-for-while">Bucles (for, while)</a></li>
+  <li><a href="#bucle-for-iterar-sobre-una-secuencia" id="toc-bucle-for-iterar-sobre-una-secuencia" class="nav-link" data-scroll-target="#bucle-for-iterar-sobre-una-secuencia">Bucle for – Iterar sobre una secuencia</a></li>
+  <li><a href="#bucle-while-repetir-mientras-una-condición-sea-verdadera" id="toc-bucle-while-repetir-mientras-una-condición-sea-verdadera" class="nav-link" data-scroll-target="#bucle-while-repetir-mientras-una-condición-sea-verdadera">Bucle while – Repetir mientras una condición sea verdadera</a></li>
+  <li><a href="#declaraciones-de-control-de-bucles-break-continue-pass" id="toc-declaraciones-de-control-de-bucles-break-continue-pass" class="nav-link" data-scroll-target="#declaraciones-de-control-de-bucles-break-continue-pass">Declaraciones de control de bucles (break, continue, pass)</a></li>
+  <li><a href="#comprensión-de-listas-list-comprehensions" id="toc-comprensión-de-listas-list-comprehensions" class="nav-link" data-scroll-target="#comprensión-de-listas-list-comprehensions">Comprensión de listas (List Comprehensions)</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Python 101</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="qué-es-python" class="level2">
+<h2 class="anchored" data-anchor-id="qué-es-python">¿Qué es Python?</h2>
+<p>Python fue inventado por Guido Van Rossum porque quería un lenguaje cuyo principal objetivo fuera proporcionar legibilidad del código y una mayor productividad para los desarrolladores. La idea se le ocurrió en 1980 y trabajó en el proyecto de manera ocasional durante sus vacaciones. No se convirtió en un lenguaje utilizable hasta 1991.</p>
+<p>Actualmente, Python es uno de los lenguajes de programación más utilizados y cuenta con un gran respaldo de la comunidad y abundante documentación.</p>
+<div class="callout callout-style-default callout-tip callout-titled" title="Detalles a tener en cuenta">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Detalles a tener en cuenta
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li>Existen muchas maneras diferentes de realizar un mismo proceso.</li>
+<li>Escribe los pasos que necesitas seguir para obtener un resultado (pseudocódigo).</li>
+<li>Busca, busca y sigue buscando: Sitios web como StackOverflow pueden ayudarte con cualquier duda. Es posible que otras personas ya hayan hecho la misma pregunta en ese espacio.</li>
+</ul>
+</div>
+</div>
+</section>
+<section id="variables" class="level2">
+<h2 class="anchored" data-anchor-id="variables">Variables</h2>
+<p>En Python, podemos asignar (darle un nombre a un valor asociándolo con una variable) un objeto o valor a una variable (un valor que tiene un nombre asociado), utilizando el signo de igualdad <code>=</code>.</p>
+<p>Por ejemplo, para asignar el valor <code>100</code> a una variable <code>weight_lb</code>, ejecutaríamos:</p>
+<div id="842da7fb" class="cell" data-execution_count="1">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>weight_lb <span class="op">=</span> <span class="dv">100</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>A partir de ahora, cada vez que usemos <code>weight_kg</code>, Python se referirá al <strong>Objeto</strong> al que apunta (en este caso, un número entero con el valor ‘100’) y sustituirá efectivamente su valor donde se utilice la variable.</p>
+</section>
+<section id="reglas-para-las-variables-en-python" class="level2">
+<h2 class="anchored" data-anchor-id="reglas-para-las-variables-en-python">Reglas para las Variables en Python</h2>
+<p>En Python, los nombres de las variables:</p>
+<ul>
+<li>Solo pueden contener caracteres alfanuméricos y guiones bajos (<code>A-z</code>, <code>0-9</code>, y <code>_</code>).</li>
+<li>Son sensibles a mayúsculas y minúsculas.</li>
+<li>No pueden comenzar con un dígito.</li>
+<li>No pueden incluir caracteres especiales.</li>
+<li>No pueden ser palabras reservadas de Python (<code>and</code>, <code>as</code>, <code>if</code>, <code>else</code>, <code>elif</code>, <code>for</code>, entre muchas otras).</li>
+</ul>
+<p>Esto significa que, por ejemplo:</p>
+<ul>
+<li><code>weight0</code> es un nombre de variable válido, mientras que <code>0weight</code> no lo es.</li>
+<li><code>weight</code> y <code>Weight</code> son variables diferentes.</li>
+<li>La variable <code>age</code> no es lo mismo que <code>AGE</code> o <code>Age</code>. <code>age</code>, <code>AGE</code> y <code>Age</code> serán tres variables distintas.</li>
+</ul>
+</section>
+<section id="usando-variables-en-python" class="level2">
+<h2 class="anchored" data-anchor-id="usando-variables-en-python">Usando variables en Python</h2>
+<p>Para mostrar el valor de una variable en la pantalla en Python, podemos usar la función <code>print</code>.</p>
+<div id="c16c5bb2" class="cell" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(weight_lb)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>100</code></pre>
+</div>
+</div>
+<div class="callout callout-style-default callout-caution callout-titled" title="Ejercicio">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Ejercicio
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Intenta crear algunas variables de los tres tipos básicos que hemos visto: <strong>Entero (Integer), Punto Flotante (Floating Point) y Cadena de Texto (String).</strong></p>
+<p>Imprime cada una utilizando la función <code>print</code>.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="cambiando-el-valor-de-una-variable" class="level2">
+<h2 class="anchored" data-anchor-id="cambiando-el-valor-de-una-variable"><strong>Cambiando el valor de una variable</strong></h2>
+<p>Puedes cambiar el valor de una variable en cualquier momento reasignando su valor.</p>
+<div id="124ec47f" class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Reasignando el valor de la variable weight_lb</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>weight_lb <span class="op">=</span> <span class="dv">200</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="3666094c" class="cell" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Reasignando el valor de la variable weight_lb</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(weight_lb)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>200</code></pre>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled" title="Consejo">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Consejo
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Usa <code>#</code> para dejar notas sobre lo que hace un bloque de código.</p>
+</div>
+</div>
+</section>
+<section id="funciones-integradas-y-operadores-básicos" class="level2">
+<h2 class="anchored" data-anchor-id="funciones-integradas-y-operadores-básicos">Funciones Integradas y Operadores Básicos</h2>
+<section id="funciones-integradas-built-in-functions" class="level3">
+<h3 class="anchored" data-anchor-id="funciones-integradas-built-in-functions"><strong>Funciones Integradas (Built-in Functions)</strong></h3>
+<ul>
+<li><code>print()</code> - imprime una declaración en pantalla.</li>
+<li><code>max()</code> - encuentra el valor más grande de uno o más valores.</li>
+<li><code>min()</code> - encuentra el valor más pequeño de uno o más valores.</li>
+<li><code>round()</code> - devuelve un número de punto flotante redondeado según el valor especificado.</li>
+<li><code>input()</code> - permite la entrada de datos por parte del usuario.</li>
+</ul>
+<div class="callout callout-style-default callout-caution callout-titled" title="Ejercicio">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Ejercicio
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Escribe un programa que imprima tu nombre.</p>
+<p>El código a continuación está parcialmente escrito. Dentro de las flechas <strong>&lt;&lt; &gt;&gt;</strong>, escribe el valor correcto.<br>
+Una vez que tengas los valores correctos, recuerda eliminar las flechas, ya que dejarlas en el código podría causar errores.</p>
+<div id="f25dbd77" class="cell" data-execution_count="5">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"What is your name?"</span>)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>name <span class="op">=</span> <span class="op">&lt;&lt;</span>What would be the appropriate function to use here?<span class="op">&gt;&gt;</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Hello, </span><span class="sc">{</span><span class="st">'&lt;What would be the appropiate variable to use here&gt;'</span><span class="sc">}</span><span class="ss">!"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="operadores" class="level3">
+<h3 class="anchored" data-anchor-id="operadores"><strong>Operadores</strong></h3>
+<p>Los operadores son símbolos que realizan operaciones específicas en uno o más objetos. Un subconjunto de estos son los operadores aritméticos con los que probablemente ya estés familiarizado:</p>
+<ul>
+<li><strong>Multiplicación:</strong> <code>a * b</code></li>
+<li><strong>Suma:</strong> <code>a + b</code></li>
+<li><strong>Resta:</strong> <code>a - b</code></li>
+<li><strong>División:</strong> <code>a / b</code></li>
+<li><strong>Asignación:</strong> <code>a = b</code></li>
+<li><strong>Suma/Resta y asignación:</strong> <code>a += b</code>, <code>a -= b</code></li>
+<li><strong>Exponente:</strong> <code>a ** b</code> (ejemplo: <code>10**3 = 1000</code>)</li>
+<li><strong>Módulo:</strong> <code>%</code> (ejemplo: <code>9 % 4 = 1</code>)</li>
+<li><strong>División Entera:</strong> <code>a // b</code> (ejemplo: <code>9 // 4 = 2</code>)</li>
+<li><strong>Indexación:</strong> <code>[]</code></li>
+</ul>
+<p>Puedes notar que la asignación (<code>=</code>), que ya hemos utilizado, es solo otro operador: intentará asignar el objeto o valor de la derecha a la variable de la izquierda.</p>
+<p>Otro operador que usarás con frecuencia es el operador de <strong>indexación (<code>[]</code>)</strong>, que generalmente se utiliza para acceder a elementos dentro de colecciones, como obtener un solo carácter de una cadena de texto.</p>
+<div class="callout callout-style-default callout-tip callout-titled" title="Los índices en Python comienzan en 0">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Los índices en Python comienzan en 0
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Esto significa que el primer elemento tiene índice 0, el segundo tiene índice 1, y así sucesivamente. En este ejemplo, accedemos al primer y al tercer carácter de una cadena de texto.</p>
+<div id="33b97975" class="cell" data-execution_count="6">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>my_str <span class="op">=</span> <span class="st">"TESTING"</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>primero <span class="op">=</span> my_str[<span class="dv">0</span>]   <span class="co"># Primer carácter: 'T'</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>tercero <span class="op">=</span> my_str[<span class="dv">2</span>]   <span class="co"># Tercer carácter: 'S'</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(primero, tercero)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>T S</code></pre>
+</div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="estructuras-de-control-en-python" class="level2">
+<h2 class="anchored" data-anchor-id="estructuras-de-control-en-python">Estructuras de Control en Python</h2>
+<p>Las estructuras de control en Python permiten dirigir el flujo de ejecución del programa, tomando decisiones o repitiendo acciones. Son esenciales para que el código pueda adaptarse a diferentes situaciones, condiciones o conjuntos de datos.</p>
+<section id="condicionales-if-elif-else" class="level3">
+<h3 class="anchored" data-anchor-id="condicionales-if-elif-else">Condicionales (if, elif, else)</h3>
+<p>Las declaraciones condicionales se usan para tomar decisiones. Permiten que el programa ejecute diferentes bloques de código dependiendo de si ciertas condiciones se cumplen o no.</p>
+<div id="e2e1bdf1" class="cell" data-execution_count="7">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> <span class="dv">10</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> x <span class="op">&gt;</span> <span class="dv">5</span>:</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"x es mayor que 5"</span>)</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="cf">elif</span> x <span class="op">==</span> <span class="dv">5</span>:</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"x es igual a 5"</span>)</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span>:</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"x es menor que 5"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>x es mayor que 5</code></pre>
+</div>
+</div>
+<p>En este ejemplo:</p>
+<ul>
+<li><p>Se evalúa si x es mayor que 5.</p></li>
+<li><p>Si no lo es, se verifica si es igual a 5.</p></li>
+<li><p>Si ninguna de las anteriores se cumple, se ejecuta el bloque else.</p></li>
+</ul>
+</section>
+<section id="bucles-for-while" class="level3">
+<h3 class="anchored" data-anchor-id="bucles-for-while">Bucles (for, while)</h3>
+<p>Los bucles permiten repetir un bloque de código múltiples veces, ya sea recorriendo una secuencia (como una lista) o mientras se cumpla una condición.</p>
+</section>
+<section id="bucle-for-iterar-sobre-una-secuencia" class="level3">
+<h3 class="anchored" data-anchor-id="bucle-for-iterar-sobre-una-secuencia">Bucle for – Iterar sobre una secuencia</h3>
+<p>El bucle for se utiliza para recorrer elementos de una secuencia (lista, tupla, cadena de texto, etc.).</p>
+<div id="dd583611" class="cell" data-execution_count="8">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>frutas <span class="op">=</span> [<span class="st">"manzana"</span>, <span class="st">"banana"</span>, <span class="st">"cereza"</span>]</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> fruta <span class="kw">in</span> frutas:</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(fruta)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>manzana
+banana
+cereza</code></pre>
+</div>
+</div>
+<p>Se imprime cada fruta de la lista una por una.</p>
+</section>
+<section id="bucle-while-repetir-mientras-una-condición-sea-verdadera" class="level3">
+<h3 class="anchored" data-anchor-id="bucle-while-repetir-mientras-una-condición-sea-verdadera">Bucle while – Repetir mientras una condición sea verdadera</h3>
+<p>El bucle while ejecuta el bloque de código mientras la condición se mantenga verdadera.</p>
+<div id="7097003f" class="cell" data-execution_count="9">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>contador <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="cf">while</span> contador <span class="op">&lt;</span> <span class="dv">5</span>:</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"Contador:"</span>, contador)</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>    contador <span class="op">+=</span> <span class="dv">1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Contador: 0
+Contador: 1
+Contador: 2
+Contador: 3
+Contador: 4</code></pre>
+</div>
+</div>
+<p>Este bucle imprime los números del 0 al 4. La variable contador se incrementa en cada vuelta hasta que deja de cumplir la condición.</p>
+</section>
+<section id="declaraciones-de-control-de-bucles-break-continue-pass" class="level3">
+<h3 class="anchored" data-anchor-id="declaraciones-de-control-de-bucles-break-continue-pass">Declaraciones de control de bucles (break, continue, pass)</h3>
+<p>Estas instrucciones especiales permiten modificar el comportamiento del bucle:</p>
+<ul>
+<li><p><strong>break:</strong> Detiene completamente la ejecución del bucle.</p></li>
+<li><p><strong>continue:</strong> Salta la iteración actual y pasa a la siguiente.</p></li>
+<li><p><strong>pass:</strong> No hace nada; se usa como marcador de posición cuando se necesita un bloque pero no queremos ejecutar código aún.</p></li>
+</ul>
+<div id="34807fe8" class="cell" data-execution_count="10">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> numero <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">10</span>):</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> numero <span class="op">==</span> <span class="dv">5</span>:</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>        <span class="cf">break</span>  <span class="co"># Sale del bucle cuando número es 5</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> numero <span class="op">==</span> <span class="dv">3</span>:</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>        <span class="cf">continue</span>  <span class="co"># Salta la iteración cuando número es 3</span></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(numero)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>0
+1
+2
+4</code></pre>
+</div>
+</div>
+<p>Resultado: Imprime los números del 0 al 4, pero salta el 3 y se detiene al llegar al 5.</p>
+</section>
+<section id="comprensión-de-listas-list-comprehensions" class="level3">
+<h3 class="anchored" data-anchor-id="comprensión-de-listas-list-comprehensions">Comprensión de listas (List Comprehensions)</h3>
+<p>Una forma concisa y elegante de crear listas en una sola línea de código, aplicando condiciones o transformaciones.</p>
+<div id="f552564a" class="cell" data-execution_count="11">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>numeros <span class="op">=</span> [x <span class="cf">for</span> x <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">10</span>) <span class="cf">if</span> x <span class="op">%</span> <span class="dv">2</span> <span class="op">==</span> <span class="dv">0</span>]</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(numeros)  <span class="co"># [0, 2, 4, 6, 8]</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[0, 2, 4, 6, 8]</code></pre>
+</div>
+</div>
+<p>Este ejemplo crea una lista con los números pares del 0 al 9.</p>
+<p>Estas estructuras de control son fundamentales para escribir programas que sean dinámicos, eficientes y fáciles de entender. Aprender a usarlas correctamente es un paso clave en el camino de dominar Python.</p>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

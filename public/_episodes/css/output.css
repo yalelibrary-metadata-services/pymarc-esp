@@ -1,0 +1,10 @@
+
+.output {
+    max-height: 400px; /* can change this */
+    max-width: 900px; /* doesn't seem to have any effect */
+    overflow: auto;
+    margin-bottom: 2em;
+    border: 3px #aaa;
+    border-radius: 1em;
+    padding: 1em;
+  }
