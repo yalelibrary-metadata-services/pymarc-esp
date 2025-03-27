@@ -10,7 +10,8 @@ keypoints:
 
 ---
 
-- Download marc files
+- Sample Data: [edited_69x_subject.mrc](data/edited_69x_subject.mrc)
+
 - Enlace al google colab (python Basics, PyMarc Basics)
 
 Vamos a seguir explorando cómo realizar búsquedas.

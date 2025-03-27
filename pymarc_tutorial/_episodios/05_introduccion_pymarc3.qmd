@@ -12,7 +12,8 @@ keypoints:
 - Podemos crear un nuevo registro MARC desde cero usando 
 ---
 
-- Download marc files
+- Sample Data: [edited_69x_subject.mrc](data/edited_69x_subject.mrc)
+
 - Enlace al google colab (python Basics, PyMarc Basics)
 
 ## Copiando registros para editar

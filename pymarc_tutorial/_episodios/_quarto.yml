@@ -8,7 +8,6 @@ website:
   page-navigation: true
   back-to-top-navigation: true
   title: "PyMARC en Español"
-  page-footer: "Contenido derivado del curso PyMARC Basics del Library Carpentry" 
   navbar:
     # style: docked
     # background: primary

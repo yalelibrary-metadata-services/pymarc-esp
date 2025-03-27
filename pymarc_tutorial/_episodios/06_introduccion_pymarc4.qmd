@@ -8,7 +8,8 @@ keypoints:
 - Podemos guardar varios registros MARC en un formato adecuado
 ---
 
-- Download marc files
+- Sample Data: [edited_69x_subject.mrc](data/edited_69x_subject.mrc)
+
 - Enlace al google colab (python Basics, PyMarc Basics)
 
 ## Guardar archivos MARC con PyMARC

@@ -8,4 +8,14 @@ Este repositorio y página espera recopilar una serie de talleres y tutoriales p
 
 ## Talleres
 
-* [Taller Introductorio PyMARC](01_introduccion.qmd)
+### [Taller Introductorio PyMARC](01_introduccion.qmd)
+  
+* Contenido derivado del curso [PyMARC Basics del Library Carpentry](https://carpentries-incubator.github.io/pymarc_basics/index.html)
+* Licensed under [CC-BY 4.0][ccby40] 2025 by Metadata Services Unit, RDS, Yale Libraries
+* Licensed under [CC-BY 4.0][ccby40] 2018-2020 by The Carpentries
+* Licensed under [CC-BY 4.0][ccby40] 2016-2018 by Software Carpentry Foundation
+  
+Sample Data: [edited_69x_subject.mrc](data/edited_69x_subject.mrc)
+
+
+[ccby40]: https://creativecommons.org/licenses/by/4.0/

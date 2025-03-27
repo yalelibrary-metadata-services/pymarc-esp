@@ -18,14 +18,14 @@
     "href": "index.html#talleres",
     "title": "PyMARC en Español",
     "section": "Talleres",
-    "text": "Talleres\n\nTaller Introductorio PyMARC"
+    "text": "Talleres\n\nTaller Introductorio PyMARC\n\nContenido derivado del curso PyMARC Basics del Library Carpentry\nLicensed under CC-BY 4.0 2025 by Metadata Services Unit, RDS, Yale Libraries\nLicensed under CC-BY 4.0 2018-2020 by The Carpentries\nLicensed under CC-BY 4.0 2016-2018 by Software Carpentry Foundation\n\nSample Data: edited_69x_subject.mrc"
   },
   {
     "objectID": "05_introduccion_pymarc3.html",
     "href": "05_introduccion_pymarc3.html",
     "title": "Editar con PyMARC",
     "section": "",
-    "text": "Download marc files\nEnlace al google colab (python Basics, PyMarc Basics)",
+    "text": "Sample Data: edited_69x_subject.mrc\nEnlace al google colab (python Basics, PyMarc Basics)",
     "crumbs": [
       "Editar con PyMARC"
     ]
@@ -135,7 +135,7 @@
     "href": "03_introduccion_pymarc.html",
     "title": "Introducción a PyMarc",
     "section": "",
-    "text": "Download marc files\nEnlace al google colab (python Basics, PyMarc Basics)",
+    "text": "Sample Data: edited_69x_subject.mrc\nEnlace al google colab (python Basics, PyMarc Basics)",
     "crumbs": [
       "Introducción a PyMarc"
     ]
@@ -395,7 +395,7 @@
     "href": "04_introduccion_pymarc2.html",
     "title": "Búsqueda con PyMARC",
     "section": "",
-    "text": "Download marc files\nEnlace al google colab (python Basics, PyMarc Basics)\nVamos a seguir explorando cómo realizar búsquedas.",
+    "text": "Sample Data: edited_69x_subject.mrc\nEnlace al google colab (python Basics, PyMarc Basics)\nVamos a seguir explorando cómo realizar búsquedas.",
     "crumbs": [
       "Búsqueda con PyMARC"
     ]
@@ -475,7 +475,7 @@
     "href": "06_introduccion_pymarc4.html",
     "title": "Guardar archivos MARC",
     "section": "",
-    "text": "Download marc files\nEnlace al google colab (python Basics, PyMarc Basics)",
+    "text": "Sample Data: edited_69x_subject.mrc\nEnlace al google colab (python Basics, PyMarc Basics)",
     "crumbs": [
       "Guardar archivos MARC"
     ]
