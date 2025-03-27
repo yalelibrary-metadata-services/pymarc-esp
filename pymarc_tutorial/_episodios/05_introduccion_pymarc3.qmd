@@ -14,8 +14,8 @@ keypoints:
 
 - Sample Data: [edited_69x_subject.mrc](data/edited_69x_subject.mrc)
 
-- Enlace al Google Colab (Python Basics, PyMarc Basics)
-
+- Accede al archivo de Goggle Colab [aqui](https://colab.research.google.com/drive/1FI4DCIFxeBIGJECH-w5pkqIU5XfQ51we?usp=sharing)
+  
 ## Copiando registros para editar
 
 Cuando queremos modificar un registro, lo más seguro es **copiarlo** antes de editarlo. Esto evita que cambiemos el registro original.
