@@ -6,6 +6,10 @@ title: PyMARC en Español
 
 Este repositorio y página espera recopilar una serie de talleres y tutoriales pare el uso de PyMARC en Español.
 
+## Acerca de los presentadores:
+
+**[Irma Fraticelli-Rodríguez](https://www.linkedin.com/in/irmarie-fraticelli/)** es una bibliotecaria en las primeras etapas de su carrera profesional y cuenta con una formación especializada en curaduria digital y manejo de datos. Actualmente, trabaja en la Universidad de Yale como Analista de Metadatos, donde se encarga de la corrección y normalización de metadatos dentro de los catálogos en línea y los sistemas de descubrimiento de la biblioteca. Su correo electrónico es: irma.fraticelli@yale.edu
+
 ## Talleres
 
 ### [Taller Introductorio PyMARC](01_introduccion.qmd)

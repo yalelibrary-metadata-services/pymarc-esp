@@ -77,9 +77,7 @@ Los cuatro más básicos (sin incluir los tipos de colección) son:
 
 - **Booleanos (`booleans`)** - un tipo binario que solo puede tener los valores `True` o `False`.
 
-- **Tupla**  
-
- También hay estructuras de colección:
+También hay estructuras de colección:
 
 - **Listas (list)** – estructuras utilizadas para almacenar múltiples elementos en una sola variable, como `mylist = ["manzana", "banana", "cereza"]`.
 

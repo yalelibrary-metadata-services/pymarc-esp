@@ -14,6 +14,13 @@
     "text": "Este repositorio y página espera recopilar una serie de talleres y tutoriales pare el uso de PyMARC en Español."
   },
   {
+    "objectID": "index.html#acerca-de-los-presentadores",
+    "href": "index.html#acerca-de-los-presentadores",
+    "title": "PyMARC en Español",
+    "section": "Acerca de los presentadores:",
+    "text": "Acerca de los presentadores:\nIrma Fraticelli-Rodríguez es una bibliotecaria en las primeras etapas de su carrera profesional y cuenta con una formación especializada en curaduria digital y manejo de datos. Actualmente, trabaja en la Universidad de Yale como Analista de Metadatos, donde se encarga de la corrección y normalización de metadatos dentro de los catálogos en línea y los sistemas de descubrimiento de la biblioteca. Su correo electrónico es: irma.fraticelli@yale.edu"
+  },
+  {
     "objectID": "index.html#talleres",
     "href": "index.html#talleres",
     "title": "PyMARC en Español",
@@ -365,7 +372,7 @@
     "href": "02_introduccion_python.html#tipos-de-datos",
     "title": "Python 101",
     "section": "Tipos de Datos",
-    "text": "Tipos de Datos\nPython reconoce varios tipos de datos.\nLos cuatro más básicos (sin incluir los tipos de colección) son:\n\nNúmeros enteros (integer) - números sin decimales, como 1234.\nNúmeros de punto flotante (float) - números decimales, como 1.34545.\nCadenas de texto (strings) - secuencias de caracteres, como \"¡Hola mundo!\".\nBooleanos (booleans) - un tipo binario que solo puede tener los valores True o False.\nTupla\n\nTambién hay estructuras de colección:\n\nListas (list) – estructuras utilizadas para almacenar múltiples elementos en una sola variable, como mylist = [\"manzana\", \"banana\", \"cereza\"].\nDiccionarios (dictionary) – estructuras que almacenan pares de clave y valor. Son útiles para buscar datos asociados a una clave específica. Ejemplo: persona = {\"nombre\": \"Ana\", \"edad\": 30, \"ciudad\": \"Madrid\"}\nTuplas (tuple) - similares a las listas, pero inmutables, es decir, no se pueden modificar después de su creación. Se usan para almacenar colecciones ordenadas de elementos. frutas = (\"manzana\", \"banana\", \"cereza\")\n\n\n\n\n\n\n\nEjercicio\n\n\n\n\n\nIntenta crear algunas variables de los tres tipos básicos que hemos visto: Entero (Integer), Punto Flotante (Floating Point) y Cadena de Texto (String).\nImprime cada una utilizando la función print.",
+    "text": "Tipos de Datos\nPython reconoce varios tipos de datos.\nLos cuatro más básicos (sin incluir los tipos de colección) son:\n\nNúmeros enteros (integer) - números sin decimales, como 1234.\nNúmeros de punto flotante (float) - números decimales, como 1.34545.\nCadenas de texto (strings) - secuencias de caracteres, como \"¡Hola mundo!\".\nBooleanos (booleans) - un tipo binario que solo puede tener los valores True o False.\n\nTambién hay estructuras de colección:\n\nListas (list) – estructuras utilizadas para almacenar múltiples elementos en una sola variable, como mylist = [\"manzana\", \"banana\", \"cereza\"].\nDiccionarios (dictionary) – estructuras que almacenan pares de clave y valor. Son útiles para buscar datos asociados a una clave específica. Ejemplo: persona = {\"nombre\": \"Ana\", \"edad\": 30, \"ciudad\": \"Madrid\"}\nTuplas (tuple) - similares a las listas, pero inmutables, es decir, no se pueden modificar después de su creación. Se usan para almacenar colecciones ordenadas de elementos. frutas = (\"manzana\", \"banana\", \"cereza\")\n\n\n\n\n\n\n\nEjercicio\n\n\n\n\n\nIntenta crear algunas variables de los tres tipos básicos que hemos visto: Entero (Integer), Punto Flotante (Floating Point) y Cadena de Texto (String).\nImprime cada una utilizando la función print.",
     "crumbs": [
       "Python 101"
     ]
